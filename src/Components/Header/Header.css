@@ -1,0 +1,46 @@
+.header {
+    width: 100%;
+    margin: 0;
+    height: 80px;
+    color: #ffffff;
+    backdrop-filter: blur(4px);
+    background-color: #c0c0c06b;
+}
+
+.header-inner {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo a {
+    display: flex;
+    align-items: last baseline;
+    gap: 10px;
+}
+
+.header-logo h1 {
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.header-logo img {
+    width: 40px;
+}
+
+.header-mode i {
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center;
+    transition: all .2s ease-in-out;
+}
+
+.sun:hover {
+    font-size: 35px;
+    transform: rotate(30deg);
+}

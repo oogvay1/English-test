@@ -1,0 +1,99 @@
+.video {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -100;
+}
+
+body {
+    overflow: hidden;
+}
+
+.container {
+    color: #ffffff;
+}
+
+.section {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-inner h1 {
+    font-size: 80px;
+}
+
+.section-inner p {
+    font-size: 30px;
+}
+
+.btn {
+    width: 200px;
+    height: 50px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.btn p {
+    margin-left: -6rem;
+    transition: all .45s ease-in-out;
+}
+
+.btn i:nth-child(1),
+.btn i:nth-child(3) {
+    height: 100%;
+    width: 50px;
+    max-width: 50px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background-color: rgb(63, 63, 63);
+    color: white;
+    transition: all .5s ease-in-out;
+}
+
+.btn i:nth-child(1) {
+    width: 0%;
+    left: 0;
+    transform-origin: left;
+}
+
+.btn i:nth-child(3) {
+    width: 100%;
+    right: 0;
+    transform-origin: right;
+}
+.btn:hover i:nth-child(3) {
+    width: 0px;
+}
+
+.btn:hover i:nth-child(1) {
+    width: 50px;
+}
+
+.btn:hover p {
+    margin-left: 5rem;
+}
+
+.btn:not(:hover) i:nth-child(1), .btn:not(:hover) i:nth-child(3) {
+    transition: all .5s ease-in-out;
+}
