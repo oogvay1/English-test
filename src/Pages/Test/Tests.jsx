@@ -5,7 +5,7 @@ function Tests() {
 
     return (
         <>
-            <Modal />
+            
         </>
     );
 }
