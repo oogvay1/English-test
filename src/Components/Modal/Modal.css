@@ -1,0 +1,22 @@
+.Modal {
+    width: 300px;
+    height: 400px;
+    border-radius: 15px;
+    background-color: red;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 26px;
+    color: black;
+}
+
+.name input {
+    width: 250px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+}
