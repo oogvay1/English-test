@@ -8,7 +8,7 @@ const App = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/tests" element={<Test />} />
     </Route>
-  )
+  ) 
 )
 
 export default App
