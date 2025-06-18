@@ -1,7 +1,9 @@
 import './Home.css'
-import { NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+import transition from '../../Transition';
 
-function Home({  }) {
+function Home({ }) {
 
     return (
         <>
@@ -27,4 +29,4 @@ function Home({  }) {
     );
 }
 
-export default Home
+export default transition(Home)
