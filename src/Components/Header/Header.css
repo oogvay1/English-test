@@ -3,8 +3,7 @@
     margin: 0;
     height: 80px;
     color: #ffffff;
-    backdrop-filter: blur(4px);
-    background-color: #c0c0c06b;
+    backdrop-filter: blur(8px);
 }
 
 .header-inner {

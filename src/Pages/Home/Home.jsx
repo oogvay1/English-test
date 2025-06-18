@@ -1,6 +1,6 @@
 import './Home.css'
 
-function Home() {
+function Home({  }) {
 
     return (
         <>
