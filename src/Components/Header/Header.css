@@ -21,6 +21,11 @@
     justify-content: space-between;
     padding: 0 20px;
 }
+.header-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .header-logo a {
     display: flex;
