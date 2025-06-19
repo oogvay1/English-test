@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: auto;
     min-height: 100%;
     margin: 0;
@@ -18,30 +19,27 @@ html, body {
     filter: brightness(.5);
 }
 
-.question-boxs{
+.question-boxs {
     backdrop-filter: blur(8px);
     max-width: 1800px;
     width: 100%;
+    display: flex;
 }
 
-.question-box{
+.question-box {
     width: 100%;
-    padding: 80px 100px;
+    padding: 80px 80px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     gap: 50px;
 }
 
-.question-box h1{
+.question-box h1 {
     text-align: center;
 }
 
-.question-box h2{
-  background-color: rgb(24, 24, 57);
-}
-
-.queestions{
+.queestions {
     height: 150px;
     display: flex;
     flex-direction: column;
@@ -49,15 +47,15 @@ html, body {
     border-bottom: 1px solid #fff;
 }
 
-.option{
+.option {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .option label {
-    /* vaqtincha */
-    background-color: rgb(55, 55, 94);
+  
+
     display: flex;
     gap: 20px;
     cursor: pointer;
