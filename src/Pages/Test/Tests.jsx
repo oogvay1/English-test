@@ -1,6 +1,8 @@
 import Modal from '../../Components/Modal/Modal';
+import transition from '../../Transition';
 import "./Test.css";
 import { useState } from "react";
+import { motion } from 'framer-motion';
 
 function Tests() {
     return (
@@ -20,4 +22,4 @@ function Tests() {
     );
 }
 
-export default Tests;
+export default transition(Tests);
