@@ -4,6 +4,7 @@ import { Home, Test } from './Pages'
 import { motion } from "framer-motion"
 import { AnimatePresence } from "framer-motion"
 import Header from "./Components/Header/Header";
+import Modal from "./Components/Modal/Modal"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/tests" element={<Test />} />
+          <Route path="/login" element={<Modal />} />
         </Routes>
       </AnimatePresence>
 

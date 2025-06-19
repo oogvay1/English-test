@@ -16,7 +16,7 @@ function Header() {
                         </div>
 
                         <div className="header-mode">
-                            <i class="ri-sun-line sun"></i>
+                            <i className="ri-sun-line sun"></i>
                         </div>
                     </div>
                 </div>
