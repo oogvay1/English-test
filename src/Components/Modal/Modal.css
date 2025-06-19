@@ -80,11 +80,6 @@
     background-color: red;
 }
 
-.input:focus,
-.input:valid {
-
-}
-
 .input::placeholder {
     color: #ffffff;
 }
@@ -104,8 +99,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 260px;
     height: 40px;
     border: none;
-    cursor: pointer;
     font-size: 20px;
+    cursor: pointer;
     border-radius: 8px;
     transition: all .2s ease-in-out;
 }
