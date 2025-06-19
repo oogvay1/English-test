@@ -2,8 +2,10 @@ import './Home.css'
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import transition from '../../Transition';
+import Modal from '../../Components/Modal/Modal';
+import { useState } from 'react';
 
-function Home({ }) {
+function Home() {
 
     return (
         <>
@@ -13,7 +15,14 @@ function Home({ }) {
                         <h1>Al Aziz Academy Test</h1>
                         <p>Click the button below and start the preview test</p>
                         <NavLink to="/tests">
-                            <button className='btn'>
+                            <button className='btn' >
+                                <i class="ri-arrow-right-line"></i>
+                                <p>Start</p>
+                                <i class="ri-arrow-right-line"></i>
+                            </button>
+                        </NavLink>
+                        <NavLink to="/login">
+                            <button className='btn' >
                                 <i class="ri-arrow-right-line"></i>
                                 <p>Start</p>
                                 <i class="ri-arrow-right-line"></i>
