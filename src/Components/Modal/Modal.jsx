@@ -33,14 +33,16 @@ function Modal() {
         }
     }
 
-    console.log(age)
+    const saveData = (e) => {
+        
+    }
 
     return (
         <>
             <div className="main-modal">
                 <div className="Modal">
                     <div className="container">
-                        <form className="form" onSubmit={(e) => e.preventDefault()}>
+                        <form className="form" onSubmit={(e) => saveData(e)}>
                             <label className='name'>
                                 <input className='input' name='name' type="text" onChange={(e) => handleForm(e)} required />
                                 <h2 className='label-h2'>Name</h2>

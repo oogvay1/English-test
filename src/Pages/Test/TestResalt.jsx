@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TestResalt() {
+function TestResult() {
   return (
     <>
 
@@ -8,4 +8,4 @@ function TestResalt() {
   )
 }
 
-export default TestResalt
+export default TestResult
