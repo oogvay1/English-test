@@ -6,7 +6,7 @@
     backdrop-filter: blur(8px);
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,7 +21,8 @@
     justify-content: space-between;
     padding: 0 20px;
 }
-.header-logo{
+
+.header-logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,7 +30,7 @@
 
 .header-logo a {
     display: flex;
-    align-items: last baseline;
+    align-items: center;
     gap: 10px;
 }
 
@@ -62,12 +63,7 @@
 
 @media screen and (max-width: 1400px) {
     .header-inner {
-    max-width: 1400px;
-    height: 80px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-    
+        max-width: 1400px;
+        width: 100%;
+    }
 }
