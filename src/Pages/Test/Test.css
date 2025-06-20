@@ -50,11 +50,15 @@ body {
     gap: 20px;
     border-bottom: 1px solid #fff;
 }
+.queestions h2{
+text-align: start;
+}
 
 .options {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 0 70px;
 }
 
 .options label {

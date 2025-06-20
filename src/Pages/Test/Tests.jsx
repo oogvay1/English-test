@@ -5,11 +5,14 @@ function Tests() {
     const [questions, setQuestions] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
+    const [skippedIndexes, setSkippedIndexes] = useState([]);
+    const [isReviewingSkipped, setIsReviewingSkipped] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('http://localhost:3000/beginner');
+                const res = await fetch('http://localhost:3000/questions');
                 const json = await res.json();
                 setQuestions(json[0]);
             } catch (err) {
@@ -24,17 +27,49 @@ function Tests() {
         if (currentIndex < questions.length - 1) {
             setCurrentIndex(prev => prev + 1);
             setSelectedOption(null);
+        } else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
+            setIsReviewingSkipped(true);
+            setCurrentIndex(skippedIndexes[0]);
+            setSkippedIndexes(prev => prev.slice(1));
+            setSelectedOption(null);
+        }
+    };
+
+    const handleDontKnow = () => {
+        if (currentIndex < questions.length - 1) {
+            setCurrentIndex(prev => prev + 1);
+            setSelectedOption(null);
+        } else if (!isReviewingSkipped && skippedIndexes.length > 0) {
+            setCurrentIndex(questions.length);
+        }
+    };
+    const handleSkip = () => {
+        if (currentIndex < questions.length - 1) {
+            setSkippedIndexes(prev => [...prev, currentIndex]);
+            setCurrentIndex(prev => prev + 1);
+            setSelectedOption(null);
+        } else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
+            setIsReviewingSkipped(true);
+            setCurrentIndex(skippedIndexes[0]);
+            setSkippedIndexes(prev => prev.slice(1));
+            setSelectedOption(null);
         }
     };
 
     const quest = questions[currentIndex];
+    const level = [
+        { level: "Beginner", score: 1.5 },
+        { level: "Elementary", score: 1.7 },
+        { level: "Pre-intermediate", score: 2.0 },
+        { level: "Intermediate", score: 2.5 }
+    ];
 
-  const level = [
-    { level: "Beginner", score: 1.5 },
-    { level: "Elementary", score: 1.7 },
-    { level: "Pre-intermediate", score: 2.0 },
-    { level: "Intermediate", score: 2.5 }
-  ];
+    const getLevel = () => {
+        if (currentIndex <= 8) return level[0];
+        if (currentIndex <= 20) return level[1];
+        if (currentIndex <= 33) return level[2];
+        return level[3];
+    };
 
     return (
         <section>
@@ -44,7 +79,7 @@ function Tests() {
             <div className="container">
                 <div className="quiz-box">
                     <div className="quiz-card">
-                        <h1><h1>{level[0].level} - {level[0].score} ball</h1></h1>
+                        <h1>{getLevel().level} - {getLevel().score} ball</h1>
                         <div className="queestions">
                             <h2>
                                 {quest ? quest.question : 'Yuklanmoqda...'}
@@ -65,9 +100,9 @@ function Tests() {
                             </div>
                         </div>
                         <div className="buttons">
-                            <button id='dont-btn'>Don't Know</button>
+                            <button id='dont-btn' onClick={handleDontKnow}>Don't Know</button>
                             <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
-                            <button id='skip-btn'>Skip</button>
+                            <button id='skip-btn' onClick={handleSkip} alert={isReviewingSkipped}>Skip</button>
                         </div>
                     </div>
                 </div>
