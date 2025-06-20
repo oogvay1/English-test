@@ -1,7 +1,96 @@
 {
-    "Questions": [
-        {
-            "qonday": "Oybek"
-        }
+    "Beginner": [
+        [
+            {
+                "id": 1,
+                "question": "......................... old are you?",
+                "options": [
+                    "A. How",
+                    "B. Who",
+                    "C. What"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 2,
+                "question": "Where ......................... ?",
+                "options": [
+                    "A. you from",
+                    "B. you are from",
+                    "C. are you from"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 3,
+                "question": "Our car isn’t fast. It’s very ......................... .",
+                "options": [
+                    "A. weak",
+                    "B. short",
+                    "C. slow"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 4,
+                "question": "My mother likes Mel Gibson, but she ......................... Arnold Schwarzenegger.",
+                "options": [
+                    "A. likes",
+                    "B. don’t like",
+                    "C. doesn’t like"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 5,
+                "question": "We usually watch a football match ......................... Saturday afternoon.",
+                "options": [
+                    "A. in",
+                    "B. on",
+                    "C. at"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 6,
+                "question": "The programme starts at ten ......................... .",
+                "options": [
+                    "A. o’clock",
+                    "B. clocks",
+                    "C. hours"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 7,
+                "question": "Where ......................... ?",
+                "options": [
+                    "A. do you work",
+                    "B. you do work",
+                    "C. you work"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 8,
+                "question": "That’s her over there – ......................... a green dress and a hat.",
+                "options": [
+                    "A. she wears",
+                    "B. she’s wearing",
+                    "C. she wearing"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 9,
+                "question": "People usually eat soup with ......................... .",
+                "options": [
+                    "A. a fork",
+                    "B. a spoon",
+                    "C. a knife"
+                ],
+                "answer": "C"
+            }
+        ]
     ]
 }
