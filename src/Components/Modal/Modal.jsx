@@ -29,21 +29,34 @@ function Modal() {
 
     let [url, setUrl] = useState('http://localhost:8080/Users');
     const data = useFetch(url);
+    let inputRef = useRef([]);
     let age = 0;
 
     let [form, setForm] = useState(
         {
             name: "",
             lastname: "",
-            birthdate: '10-10-1000'
+            birthdate: '',
+            age: ''
         }
     )
 
+    const isValid = inputRef.current.every(
+        (el) => el && el.value.trim() !== ''
+    );
 
     const saveData = async (e) => {
         e.preventDefault()
 
-        if (form.birthdate, form.lastname, form.name) {
+        inputRef.current.forEach(el => {
+            if (el && el.value.trim() === '') {
+                el.parentElement.style.borderBottom = '2px solid red'
+            } else if (el) {
+                el.parentElement.style.borderBottom = '';
+            }
+        });
+
+        if (isValid) {
             try {
                 const response = await fetch(url, {
                     method: "POST",
@@ -70,7 +83,11 @@ function Modal() {
                 console.error('Error adding user:', error);
             }
         }
+        // inputRef.current.forEach((el) => {
+        //     if (el) el.parentElement.style.borderBottom = '2px solid #fff';
+        // });
     }
+
 
     const handleForm = (e) => {
         const { name, value } = e.target;
@@ -89,7 +106,8 @@ function Modal() {
 
             setForm({
                 ...form,
-                birthdate: age
+                birthdate: value,
+                age: age
             });
         } else {
             setForm({
@@ -108,19 +126,31 @@ function Modal() {
                         <form className="form" onSubmit={(e) => saveData(e)}>
                             <div className="form-inputs">
                                 <label className='name'>
-                                    <input className='input' name='name' value={form.name} type="text" onChange={(e) => handleForm(e)} required autoComplete='off' />
+                                    <input ref={(el) => {
+                                        if (el && !inputRef.current.includes(el)) {
+                                            inputRef.current.push(el);
+                                        }
+                                    }} className='input' name='name' value={form.name} type="text" onChange={(e) => handleForm(e)} autoComplete='off' />
                                     <h2 className='label-h2'>Name</h2>
                                     <i className="ri-user-line"></i>
                                 </label>
 
                                 <label className='name'>
-                                    <input className='input' name='lastname' value={form.lastname} type="text" onChange={(e) => handleForm(e)} required autoComplete='off' />
+                                    <input ref={(el) => {
+                                        if (el && !inputRef.current.includes(el)) {
+                                            inputRef.current.push(el);
+                                        }
+                                    }} className='input' name='lastname' value={form.lastname} type="text" onChange={(e) => handleForm(e)} autoComplete='off' />
                                     <h2 className='label-h2'>Lastname</h2>
                                     <i className="ri-user-line"></i>
                                 </label>
 
                                 <label className='name'>
-                                    <input className='input' name='birthdate' type="date" onChange={(e) => handleForm(e)} required autoComplete='off' />
+                                    <input ref={(el) => {
+                                        if (el && !inputRef.current.includes(el)) {
+                                            inputRef.current.push(el);
+                                        }
+                                    }} className='input' name='birthdate' value={form.birthdate} type="date" onChange={(e) => handleForm(e)} autoComplete='off' />
                                     <i className="ri-calendar-line"></i>
                                 </label>
                             </div>

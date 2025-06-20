@@ -1,6 +1,6 @@
 import { Route, Router, Routes, useLocation } from "react-router-dom"
 import Layout from "./Layouts/Layout"
-import { Home, Test } from './Pages'
+import { Home, Test } from './Pages/Index'
 import { motion } from "framer-motion"
 import { AnimatePresence } from "framer-motion"
 import Header from "./Components/Header/Header";
