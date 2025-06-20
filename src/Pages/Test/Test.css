@@ -17,7 +17,7 @@ body {
     filter: brightness(.5);
 }
 
-.quiz-box{
+.quiz-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,9 +35,10 @@ body {
     border-radius: 30px;
     padding: 30px 50px;
     text-align: center;
-}
+    background-color: #d4d4d445;
+    backdrop-filter: blur(6px);}
 
-.quiz-card h1{
+.quiz-card h1 {
     text-align: center;
 }
 
@@ -45,7 +46,7 @@ body {
     height: 300px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly   ;
+    justify-content: space-evenly;
     gap: 20px;
     border-bottom: 1px solid #fff;
 }
@@ -64,32 +65,44 @@ body {
 
 /*  *** Button  *** */
 
-.buttons{
+.buttons {
     display: flex;
     align-items: center;
     justify-content: space-around;
     height: 120px;
 }
 
-.buttons button{
+.buttons button {
     padding: 10px 20px;
     border: none;
     border-radius: 7px;
     color: #fff;
     cursor: pointer;
-    transition: all .5s;
+    transition: all .2s;
 }
-.buttons button:active{
-    margin-top: 5px;
+
+.buttons button:active {
+    margin-top: 10px;
     box-shadow: 0px -5px 0px rgba(34, 34, 34, 0.581);
 }
 
-#next-btn{
+#next-btn {
     background-color: green;
     height: 50px;
     width: 150px;
 }
-#next-btn:hover{
-       background-color: rgb(0, 67, 0);
 
+#next-btn:hover {
+    background-color: rgb(0, 67, 0);
+}
+
+#skip-btn {
+    background-color: blue;
+    height: 35px;
+    width: 130px;
+}
+#dont-btn {
+    background-color: red;
+    height: 35px;
+    width: 130px;
 }
