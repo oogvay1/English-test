@@ -28,6 +28,7 @@ function validObj(obj) {
 function Modal() {
 
     let [url, setUrl] = useState('http://localhost:8080/Users');
+    let [saved, setSaved] = useState(false);
     const data = useFetch(url);
     let inputRef = useRef([]);
     let age = 0;
@@ -43,10 +44,11 @@ function Modal() {
 
     const isValid = inputRef.current.every(
         (el) => el && el.value.trim() !== ''
-    );
+    ) && form.age < 100;
 
     const saveData = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        setSaved(true);
 
         inputRef.current.forEach(el => {
             if (el && el.value.trim() === '') {
@@ -83,9 +85,6 @@ function Modal() {
                 console.error('Error adding user:', error);
             }
         }
-        // inputRef.current.forEach((el) => {
-        //     if (el) el.parentElement.style.borderBottom = '2px solid #fff';
-        // });
     }
 
 
@@ -102,7 +101,12 @@ function Modal() {
                 age--;
             }
 
+            if (age > 100) {
+                
+            }
+
             console.log('Calculated age:', age);
+
 
             setForm({
                 ...form,
@@ -113,6 +117,16 @@ function Modal() {
             setForm({
                 ...form,
                 [name]: value
+            });
+        }
+
+        if (saved) {
+            inputRef.current.forEach(el => {
+                if (el && el.value.trim() !== '') {
+                    el.parentElement.style.borderBottom = '2px solid #fff'
+                } else if (el) {
+                    el.parentElement.style.borderBottom = '2px solid red';
+                }
             });
         }
     };
@@ -130,7 +144,7 @@ function Modal() {
                                         if (el && !inputRef.current.includes(el)) {
                                             inputRef.current.push(el);
                                         }
-                                    }} className='input' name='name' value={form.name} type="text" onChange={(e) => handleForm(e)} autoComplete='off' />
+                                    }} className={`input ${form.name ? 'filled' : ''}`} name='name' value={form.name} type="text" onChange={(e) => handleForm(e)} autoComplete='off' />
                                     <h2 className='label-h2'>Name</h2>
                                     <i className="ri-user-line"></i>
                                 </label>
@@ -140,7 +154,7 @@ function Modal() {
                                         if (el && !inputRef.current.includes(el)) {
                                             inputRef.current.push(el);
                                         }
-                                    }} className='input' name='lastname' value={form.lastname} type="text" onChange={(e) => handleForm(e)} autoComplete='off' />
+                                    }} className={`input ${form.lastname ? 'filledd' : ''}`} name='lastname' value={form.lastname} type="text" onChange={(e) => handleForm(e)} autoComplete='off' />
                                     <h2 className='label-h2'>Lastname</h2>
                                     <i className="ri-user-line"></i>
                                 </label>

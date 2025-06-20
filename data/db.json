@@ -1,46 +1,5 @@
 {
   "Users": [
-    {
-      "id": "6dbc",
-      "name": "sadfasdf",
-      "lastname": "asdfasdf",
-      "birthdate": "1212-12-12",
-      "age": 812
-    },
-    {
-      "id": "b582",
-      "name": "asdfsadf",
-      "lastname": "asdfasdf",
-      "birthdate": "1212-12-12",
-      "age": 812
-    },
-    {
-<<<<<<< HEAD
-      "id": "7e97",
-      "name": "Oybek",
-      "lastname": "Bekmirzayev",
-      "birthdate": "2008-07-17"
-=======
-      "id": "808a",
-      "name": "asdsdf",
-      "lastname": "sgsdfg",
-      "birthdate": "1212-12-12",
-      "age": 812
->>>>>>> 628a380c637cd4d39581ab5e5d7f95a983d57ab9
-    },
-    {
-      "id": "00b9",
-      "name": "s",
-      "lastname": "sdfg",
-      "birthdate": "1212-12-12",
-      "age": 812
-    },
-    {
-      "id": "5b4a",
-      "name": "asdf",
-      "lastname": "asdf",
-      "birthdate": "1212-12-12",
-      "age": 812
-    }
+   
   ]
 }
