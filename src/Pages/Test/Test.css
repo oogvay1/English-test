@@ -5,10 +5,8 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
-
-
-
 
 .video {
     width: 100%;
@@ -19,44 +17,79 @@ body {
     filter: brightness(.5);
 }
 
-.question-boxs {
-    backdrop-filter: blur(8px);
-    max-width: 1800px;
-    width: 100%;
-    display: flex;
-}
-
-.question-box {
-    width: 100%;
-    padding: 80px 80px;
-    border-radius: 20px;
+.quiz-box{
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    max-width: 1800px;
+    height: 650px;
+    width: 100%;
 }
 
-.question-box h1 {
+.quiz-card {
+    backdrop-filter: blur(6px);
+    max-width: 950px;
+    height: 500px;
+    width: 100%;
+    border-radius: 30px;
+    padding: 30px 50px;
+    text-align: center;
+}
+
+.quiz-card h1{
     text-align: center;
 }
 
 .queestions {
-    height: 150px;
+    height: 300px;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly   ;
     gap: 20px;
     border-bottom: 1px solid #fff;
 }
 
-.option {
+.options {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
-.option label {
-  
-
+.options label {
     display: flex;
     gap: 20px;
     cursor: pointer;
+}
+
+/*  *** Button  *** */
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 120px;
+}
+
+.buttons button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    color: #fff;
+    cursor: pointer;
+    transition: all .5s;
+}
+.buttons button:active{
+    margin-top: 5px;
+    box-shadow: 0px -5px 0px rgba(34, 34, 34, 0.581);
+}
+
+#next-btn{
+    background-color: green;
+    height: 50px;
+    width: 150px;
+}
+#next-btn:hover{
+       background-color: rgb(0, 67, 0);
+
 }
