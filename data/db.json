@@ -1,142 +1,39 @@
 {
   "Users": [
     {
-      "id": "b815",
-      "name": "Azimbek",
-      "lastname": "Alibekov",
-      "birthdate": "1212-12-12"
+      "id": "6dbc",
+      "name": "sadfasdf",
+      "lastname": "asdfasdf",
+      "birthdate": "1212-12-12",
+      "age": 812
     },
     {
-      "id": "536f",
-      "name": "Umarbeck",
-      "lastname": "Tugalov",
-      "birthdate": "1111-11-11"
+      "id": "b582",
+      "name": "asdfsadf",
+      "lastname": "asdfasdf",
+      "birthdate": "1212-12-12",
+      "age": 812
     },
     {
-      "id": "7e97",
-      "name": "dghedfgh",
-      "lastname": "fdghdfgh",
-      "birthdate": "3212-04-12"
+      "id": "808a",
+      "name": "asdsdf",
+      "lastname": "sgsdfg",
+      "birthdate": "1212-12-12",
+      "age": 812
     },
     {
-      "id": "5dc0",
-      "name": "sdssds",
-      "lastname": "fgfgfgf",
-      "birthdate": "2010-09-12"
+      "id": "00b9",
+      "name": "s",
+      "lastname": "sdfg",
+      "birthdate": "1212-12-12",
+      "age": 812
     },
     {
-      "id": "25bf",
-      "name": "asdasd",
-      "lastname": "asdasd",
-      "birthdate": "2222-02-11"
-    },
-    {
-      "id": "1251",
-      "name": "dfghfdgh",
-      "lastname": "dfghfdgh",
-      "birthdate": "3222-03-12"
-    },
-    {
-      "id": "45d7",
-      "name": "ssss",
-      "lastname": "aaaaaaaa",
-      "birthdate": "2322-03-12"
-    },
-    {
-      "id": "33ea",
-      "name": "asss",
-      "lastname": "dsdsdsd",
-      "birthdate": "1212-12-12"
-    },
-    {
-      "id": 2,
-      "name": "asdasd",
-      "lastname": "asdasd",
-      "birthdate": "1212-12-12"
-    },
-    {
-      "id": "225b",
-      "name": "",
-      "lastname": "",
-      "birthdate": ""
-    },
-    {
-      "id": "8081",
-      "name": "",
-      "lastname": "",
-      "birthdate": ""
-    },
-    {
-      "id": "710b",
-      "name": "AA",
-      "lastname": "ssss",
-      "birthdate": "1212-12-12"
-    },
-    {
-      "id": "b4f2",
-      "name": "",
-      "lastname": "",
-      "birthdate": ""
-    },
-    {
-      "id": "eb79",
-      "name": "",
-      "lastname": "",
-      "birthdate": 0
-    },
-    {
-      "id": "c3f9",
-      "name": "AA",
-      "lastname": "sdfdsfg",
-      "birthdate": "1212-12-12"
-    },
-    {
-      "id": "76fe",
-      "name": "Azimbek",
-      "lastname": "Alibekov",
-      "birthdate": 0
-    },
-    {
-      "id": "fef2",
-      "name": "sdfgsdfg",
-      "lastname": "sdfgsdfg",
-      "birthdate": 0
-    },
-    {
-      "id": "afa8",
-      "name": "",
-      "lastname": "",
-      "birthdate": ""
-    },
-    {
-      "id": "6897",
-      "name": "asfdf",
-      "lastname": "dfsd",
-      "birthdate": 0
-    },
-    {
-      "id": "fc43",
-      "name": "adsd",
-      "lastname": "sdfgdsfg",
-      "birthdate": 0
-    },
-    {
-      "id": "40d4",
-      "name": "1212",
-      "lastname": "sdfsdg",
-      "birthdate": 0
-    },
-    {
-      "id": "f58d",
-      "name": "AA",
-      "lastname": "asfsfd",
-      "birthdate": 55
-    },
-    {
-      "id": "2acd",
-      "name": "dgsdfg",
-      "lastname": "sdgsdfg",
-      "birthdate": 812
+      "id": "5b4a",
+      "name": "asdf",
+      "lastname": "asdf",
+      "birthdate": "1212-12-12",
+      "age": 812
     }
   ]
 }
