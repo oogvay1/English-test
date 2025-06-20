@@ -1,6 +1,14 @@
+import { useRef } from 'react'
 import './Test.css'
 
 function Tests() {
+
+    const handleData = (e) => {
+        const id = e.currentTarget.dataset.true;
+        alert(id)
+        console.log(e)
+    }
+
     return (
         <>
             <section>
@@ -14,7 +22,7 @@ function Tests() {
                             <div className="queestions">
                                 <h2>1 ......................... old are you?</h2>
                                 <div className="options">
-                                    <label><input name='q1' type="radio" />How </label>
+                                    <label><input data-true="true"  name='q1' type="radio" />How </label>
                                     <label><input name='q1' type="radio" />Who </label>
                                     <label><input name='q1' type="radio" />What </label>
                                 </div>

@@ -62,7 +62,7 @@
     margin-right: 10px;
 }
 
-.name h2 {
+.label-h2 {
     position: absolute;
     margin-top: 6px;
     padding-left: 10px;
@@ -75,9 +75,19 @@
 }
 
 .input:focus~.label-h2,
-.input:valid~.label-h2 {
+.input.filled~.label-h2,
+.input.filledd~.label-h2 {
     margin-top: -64px;
     color: #d4d4d4;
+}
+
+.input.filledd~.label-h2 {
+    margin-top: -64px;
+    color: #d4d4d4;
+}
+
+.input::selection {
+    background-color: black;
 }
 
 .input:hover::before {
