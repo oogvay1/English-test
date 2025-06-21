@@ -1,4 +1,3 @@
-import { th } from "framer-motion/client"
 import { useEffect, useState } from "react"
 
 function useFetch(url) {

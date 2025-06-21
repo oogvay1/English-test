@@ -27,8 +27,7 @@ body {
     width: 100%;
 }
 
-.quiz-card {
-    backdrop-filter: blur(6px);
+.quiz-card, .quiz-end {
     max-width: 950px;
     height: 500px;
     width: 100%;
@@ -36,7 +35,16 @@ body {
     padding: 30px 50px;
     text-align: center;
     background-color: #d4d4d445;
-    backdrop-filter: blur(6px);}
+    backdrop-filter: blur(6px);
+}
+
+.quiz-end {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+}
 
 .quiz-card h1 {
     text-align: center;
@@ -51,10 +59,15 @@ body {
     border-bottom: 1px solid #fff;
 }
 
+.queestions h2 {
+    text-align: start;
+}
+
 .options {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 0 70px;
 }
 
 .options label {
@@ -83,13 +96,20 @@ body {
 
 .buttons button:active {
     margin-top: 10px;
-    box-shadow: 0px -5px 0px rgba(34, 34, 34, 0.581);
+    box-shadow: 0px -5px 0px rgba(85, 75, 75, 0.581);
 }
 
 #next-btn {
     background-color: green;
     height: 50px;
     width: 150px;
+}
+
+#next-btn:disabled {
+    background-color: rgb(83, 99, 83);
+    color: white;
+    border: 1px solid rgb(0, 67, 0);
+    cursor: not-allowed;
 }
 
 #next-btn:hover {
@@ -101,8 +121,33 @@ body {
     height: 35px;
     width: 130px;
 }
+
 #dont-btn {
     background-color: red;
     height: 35px;
     width: 130px;
+}
+
+.result-btn{
+    width: 200px;
+    height: 50px;
+    border: none;
+    display: flex;
+    border: none;
+    outline: none;
+    object-fit: contain;
+    justify-content: center;
+    align-items: center;
+    border-radius: 13px;
+    font-size: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transform-origin: center;
+    background-color: #ececec;
+    transition: all .2s ease-in-out;
+}
+
+.btn:active {
+    scale: .97;
 }
