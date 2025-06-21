@@ -1,0 +1,18 @@
+html,
+body {
+    height: auto;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.video {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -100;
+    filter: brightness(.5);
+}

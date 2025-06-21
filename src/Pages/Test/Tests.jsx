@@ -1,5 +1,6 @@
 import './Test.css';
 import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom'
 
 function Tests() {
     const [questions, setQuestions] = useState([]);
@@ -7,7 +8,7 @@ function Tests() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [skippedIndexes, setSkippedIndexes] = useState([]);
     const [isReviewingSkipped, setIsReviewingSkipped] = useState(false);
-
+    const [isFinished, setIsFinished] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,7 +32,9 @@ function Tests() {
             setIsReviewingSkipped(true);
             setCurrentIndex(skippedIndexes[0]);
             setSkippedIndexes(prev => prev.slice(1));
-            setSelectedOption(null);
+            setSelectedOption(null)
+        } else if (skippedIndexes.length === 0 || isReviewingSkipped) {
+            setIsFinished(true);
         }
     };
 
@@ -41,6 +44,8 @@ function Tests() {
             setSelectedOption(null);
         } else if (!isReviewingSkipped && skippedIndexes.length > 0) {
             setCurrentIndex(questions.length);
+        } else {
+            setIsFinished(true);
         }
     };
     const handleSkip = () => {
@@ -53,10 +58,13 @@ function Tests() {
             setCurrentIndex(skippedIndexes[0]);
             setSkippedIndexes(prev => prev.slice(1));
             setSelectedOption(null);
+        } else if (skippedIndexes.length === 0 || isReviewingSkipped) {
+            setIsFinished(true);
         }
     };
 
     const quest = questions[currentIndex];
+    if (!quest) return null
     const level = [
         { level: "Beginner", score: 1.5 },
         { level: "Elementary", score: 1.7 },
@@ -78,33 +86,42 @@ function Tests() {
             </video>
             <div className="container">
                 <div className="quiz-box">
-                    <div className="quiz-card">
-                        <h1>{getLevel().level} - {getLevel().score} ball</h1>
-                        <div className="queestions">
-                            <h2>
-                                {quest ? quest.question : 'Yuklanmoqda...'}
-                            </h2>
-                            <div className="options">
-                                {quest && quest.options.map((opt, i) => (
-                                    <label key={i}>
-                                        <input
-                                            name='options'
-                                            type="radio"
-                                            value={opt}
-                                            checked={selectedOption === opt}
-                                            onChange={() => setSelectedOption(opt)}
-                                        />
-                                        {opt}
-                                    </label>
-                                ))}
+                    {!isFinished ? (
+                        <div className="quiz-card">
+                            <h1>{getLevel().level} - {getLevel().score} ball</h1>
+                            <div className="queestions">
+                                <h2>
+                                    {quest ? quest.question : "Yuklanmoqda..."}
+                                </h2>
+                                <div className="options">
+                                    {quest && quest.options.map((opt, i) => (
+                                        <label key={i}>
+                                            <input
+                                                name='options'
+                                                type="radio"
+                                                value={opt}
+                                                checked={selectedOption === opt}
+                                                onChange={() => setSelectedOption(opt)}
+                                            />
+                                            {opt}
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="buttons">
+                                <button id='dont-btn' onClick={handleDontKnow}>Don't Know</button>
+                                <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
+                                <button id='skip-btn' onClick={handleSkip}>Skip</button>
                             </div>
                         </div>
-                        <div className="buttons">
-                            <button id='dont-btn' onClick={handleDontKnow}>Don't Know</button>
-                            <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
-                            <button id='skip-btn' onClick={handleSkip} alert={isReviewingSkipped}>Skip</button>
+                    ) : (
+                        <div className="quiz-end">
+                            <h2>All tests over</h2>
+                            <NavLink to="./result">
+                                <button className='next-btn'>Go</button>
+                            </NavLink>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </section>
