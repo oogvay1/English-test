@@ -129,3 +129,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .submit-btn:active {
     scale: .99;
 }
+
+.valid-p {
+    position: absolute;
+    top: 250px;
+}

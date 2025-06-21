@@ -1,6 +1,7 @@
 import './Test.css';
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
+import transition from '../../Transition';
 
 function Tests() {
     const [questions, setQuestions] = useState([]);
@@ -117,8 +118,8 @@ function Tests() {
                     ) : (
                         <div className="quiz-end">
                             <h2>All tests over</h2>
-                            <NavLink to="./result">
-                                <button className='next-btn'>Go</button>
+                            <NavLink to="/result">
+                                <button className='result-btn'>Result</button>
                             </NavLink>
                         </div>
                     )}
@@ -128,4 +129,4 @@ function Tests() {
     );
 }
 
-export default Tests;
+export default transition(Tests);

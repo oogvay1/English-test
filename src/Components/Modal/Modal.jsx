@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import transition from '../../Transition';
 import './Modal.css'
 import useFetch from '../../Hooks/useFetch';
+import { p } from 'framer-motion/client';
 
 function validObj(obj) {
     if (typeof obj !== 'object' || obj === null) {
@@ -31,6 +32,7 @@ function Modal() {
     let [saved, setSaved] = useState(false);
     const data = useFetch(url);
     let inputRef = useRef([]);
+    let ageRef = useRef(null);
     let age = 0;
 
     let [form, setForm] = useState(
@@ -57,6 +59,10 @@ function Modal() {
                 el.parentElement.style.borderBottom = '';
             }
         });
+
+        if (form.age > 100) {
+            alert('Jinnimizis')
+        }
 
         if (isValid) {
             try {
@@ -101,12 +107,7 @@ function Modal() {
                 age--;
             }
 
-            if (age > 100) {
-                
-            }
-
             console.log('Calculated age:', age);
-
 
             setForm({
                 ...form,
@@ -126,6 +127,8 @@ function Modal() {
                     el.parentElement.style.borderBottom = '2px solid #fff'
                 } else if (el) {
                     el.parentElement.style.borderBottom = '2px solid red';
+                } else if (form.age > 100) {
+                    ageRef.current.style.borderBottom = '2px solid red'
                 }
             });
         }
@@ -159,13 +162,14 @@ function Modal() {
                                     <i className="ri-user-line"></i>
                                 </label>
 
-                                <label className='name'>
+                                <label ref={ageRef} className='name'>
                                     <input ref={(el) => {
                                         if (el && !inputRef.current.includes(el)) {
                                             inputRef.current.push(el);
                                         }
                                     }} className='input' name='birthdate' value={form.birthdate} type="date" onChange={(e) => handleForm(e)} autoComplete='off' />
                                     <i className="ri-calendar-line"></i>
+                                    {form.age  && <p className='valid-p'>Enter valid age</p>}
                                 </label>
                             </div>
 

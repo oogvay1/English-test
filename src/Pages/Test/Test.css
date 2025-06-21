@@ -27,7 +27,7 @@ body {
     width: 100%;
 }
 
-.quiz-card {
+.quiz-card, .quiz-end {
     max-width: 950px;
     height: 500px;
     width: 100%;
@@ -39,14 +39,10 @@ body {
 }
 
 .quiz-end {
-    max-width: 950px;
-    height: 500px;
-    width: 100%;
-    border-radius: 30px;
-    padding: 30px 50px;
-    text-align: center;
-    background-color: #d4d4d445;
-    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     font-size: 1.5rem;
 }
 
@@ -130,4 +126,28 @@ body {
     background-color: red;
     height: 35px;
     width: 130px;
+}
+
+.result-btn{
+    width: 200px;
+    height: 50px;
+    border: none;
+    display: flex;
+    border: none;
+    outline: none;
+    object-fit: contain;
+    justify-content: center;
+    align-items: center;
+    border-radius: 13px;
+    font-size: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transform-origin: center;
+    background-color: #ececec;
+    transition: all .2s ease-in-out;
+}
+
+.btn:active {
+    scale: .97;
 }
