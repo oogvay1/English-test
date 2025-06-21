@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import './Test.css';
 import { useState, useEffect } from 'react';
 
 function Tests() {
     const [questions, setQuestions] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    let navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,11 +21,33 @@ function Tests() {
         fetchData();
     }, []);
 
+
+    const [skipped, setSkipped] = useState([]);
+
     const handleNext = () => {
         if (currentIndex < questions.length - 1) {
             setCurrentIndex(prev => prev + 1);
+        } else if (skipped.length > 0) {
+            setQuestions(skipped);
+            setSkipped([]);
+            setCurrentIndex(0);
+        } else {
+            navigate('/test-result')
         }
     };
+
+    const handleSkip = () => {
+        const skippedQuestion = questions[currentIndex];
+        setSkipped(prev => [...prev, skippedQuestion]);
+
+        const newQuestions = questions.filter((_, i) => i !== currentIndex);
+        setQuestions(newQuestions);
+
+        if (currentIndex >= newQuestions.length) {
+            setCurrentIndex(prev => Math.max(prev - 1, 0));
+        }
+    };
+
 
     const quest = questions[currentIndex];
 
@@ -52,7 +76,7 @@ function Tests() {
                         <div className="buttons">
                             <button id='dont-btn'>Don't Know</button>
                             <button id='next-btn' onClick={handleNext}>Next</button>
-                            <button id='skip-btn'>Skip</button>
+                            <button id='skip-btn' onClick={handleSkip}>Skip</button>
                         </div>
                     </div>
                 </div>
