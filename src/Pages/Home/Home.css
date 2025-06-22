@@ -111,3 +111,12 @@ body {
 .btn:not(:hover) i:nth-child(3) {
     transition: all .5s ease-in-out;
 }
+
+
+@media screen and (max-width: 1400px) {
+    .video {
+        rotate: 180deg;
+        height: 100vh;
+        scale: 1.05;
+    }
+}
