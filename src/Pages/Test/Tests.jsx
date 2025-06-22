@@ -13,7 +13,9 @@ function Tests() {
     const [isFinished, setIsFinished] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [dontKnowCount, setDontKnowCount] = useState(0);
+    const [countdown, setCountdown] = useState(10);
     const [levelStats, setLevelStats] = useState({
+
         Beginner: 0,
         Elementary: 0,
         "Pre-intermediate": 0,
@@ -79,20 +81,25 @@ function Tests() {
     const handleFinish = () => {
         setIsFinished(true);
     };
-
     useEffect(() => {
         if (isFinished) {
-            const timeout = setTimeout(() => {
-                navigate('/result', {
-                    state: {
-                        correctAnswers,
-                        dontKnowCount,
-                        levelStats
+            const timer = setInterval(() => {
+                setCountdown(prev => {
+                    if (prev === 1) {
+                        clearInterval(timer);
+                        navigate('/result', {
+                            state: {
+                                correctAnswers,
+                                dontKnowCount,
+                                levelStats
+                            }
+                        });
                     }
+                    return prev - 1;
                 });
-            }, 10000);
+            }, 1000);
 
-            return () => clearTimeout(timeout);
+            return () => clearInterval(timer);
         }
     }, [isFinished]);
 
@@ -166,6 +173,7 @@ function Tests() {
                     ) : (
                         <div className="quiz-end">
                             <h2>Ready to see the test results?</h2>
+                            <p>{countdown} </p>
                         </div>
                     )}
                 </div>

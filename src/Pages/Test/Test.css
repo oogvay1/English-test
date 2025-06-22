@@ -38,6 +38,10 @@ body {
     backdrop-filter: blur(6px);
 }
 
+.quiz-card h2 {
+    text-align: center;
+}
+
 .quiz-end {
     display: flex;
     flex-direction: column;
@@ -45,10 +49,10 @@ body {
     align-items: center;
     font-size: 1.5rem;
 }
-
-.quiz-card h1 {
-    text-align: center;
+.quiz-end p{
+   font-size: 90px;
 }
+
 
 .queestions {
     height: 300px;

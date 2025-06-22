@@ -5,7 +5,8 @@ import { motion } from "framer-motion"
 import { AnimatePresence } from "framer-motion"
 import Header from "./Components/Header/Header";
 import Modal from "./Components/Modal/Modal"
-import TestResalt from "./Pages/Test/TestResalt"
+import TestResult from "./Pages/Result/TestResaut"
+
 
 function App() {
 
@@ -19,11 +20,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/tests" element={<Test />} />
           <Route path="/login" element={<Modal />} />
-          <Route path="/result" element={<TestResalt />} />
+          <Route path="/result" element={<TestResult />} />
         </Routes>
       </AnimatePresence>
-
-
     </>
   );
 }
