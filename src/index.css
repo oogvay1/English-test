@@ -54,3 +54,14 @@ body {
     background-color: #191919;
     transform-origin: top;
 }
+
+.video {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -100;
+    filter: brightness(.5);
+}
+
+@media screen and (max-width: )

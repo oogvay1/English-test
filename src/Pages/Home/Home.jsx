@@ -14,13 +14,6 @@ function Home() {
                     <div className="section-inner">
                         <h1>Al Aziz Academy Test</h1>
                         <p>Click the button below and start the preview test</p>
-                        <NavLink to="/tests">
-                            <button className='btn' >
-                                <i class="ri-arrow-right-line"></i>
-                                <p>Start</p>
-                                <i class="ri-arrow-right-line"></i>
-                            </button>
-                        </NavLink>
                         <NavLink to="/login">
                             <button className='btn' >
                                 <i class="ri-arrow-right-line"></i>

@@ -3,6 +3,7 @@ import transition from '../../Transition';
 import './Modal.css'
 import useFetch from '../../Hooks/useFetch';
 import { p } from 'framer-motion/client';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function validObj(obj) {
     if (typeof obj !== 'object' || obj === null) {
@@ -33,7 +34,7 @@ function Modal() {
     const data = useFetch(url);
     let inputRef = useRef([]);
     let ageRef = useRef(null);
-    let age = 0;
+    let [errorAge, setErrorAge] = useState(false);
 
     let [form, setForm] = useState(
         {
@@ -59,10 +60,6 @@ function Modal() {
                 el.parentElement.style.borderBottom = '';
             }
         });
-
-        if (form.age > 100) {
-            alert('Jinnimizis')
-        }
 
         if (isValid) {
             try {
@@ -97,17 +94,16 @@ function Modal() {
     const handleForm = (e) => {
         const { name, value } = e.target;
 
+        const birthDate = new Date(value);
+
         if (name === 'birthdate') {
             const today = new Date();
-            const birthDate = new Date(value);
             let age = today.getFullYear() - birthDate.getFullYear();
             const m = today.getMonth() - birthDate.getMonth();
 
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
             }
-
-            console.log('Calculated age:', age);
 
             setForm({
                 ...form,
@@ -134,6 +130,15 @@ function Modal() {
         }
     };
 
+    function checkAge() {
+        const today = new Date(form.birthdate)
+
+        if (today <= 1920) {
+            setErrorAge(true);
+        } else {
+            setErrorAge(false)
+        }
+    }
 
     return (
         <>
@@ -167,17 +172,17 @@ function Modal() {
                                         if (el && !inputRef.current.includes(el)) {
                                             inputRef.current.push(el);
                                         }
-                                    }} className='input' name='birthdate' value={form.birthdate} type="date" onChange={(e) => handleForm(e)} autoComplete='off' />
+                                    }} className='input' name='birthdate' value={form.birthdate} type="date" onChange={(e) => { handleForm(e) }} autoComplete='off' />
+                                    {errorAge && <p className='valid-p'>Enter valid age</p>}
                                     <i className="ri-calendar-line"></i>
-                                    {form.age  && <p className='valid-p'>Enter valid age</p>}
                                 </label>
                             </div>
 
-                            <button className='submit-btn' >Submit</button>
+                            <button className='submit-btn' onClick={() => checkAge()}> Submit</button>
                         </form>
                     </div>
                 </div>
-            </div>
+            </div >
 
             <video className='video' autoPlay muted loop width="100%">
                 <source src="src/assets/imgs/ace4939aefe5a2c294d49273022c3503.mp4" type="video/mp4" />
