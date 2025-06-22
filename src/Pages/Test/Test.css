@@ -132,22 +132,15 @@ body {
     width: 200px;
     height: 50px;
     border: none;
-    display: flex;
-    border: none;
-    outline: none;
-    object-fit: contain;
     justify-content: center;
     align-items: center;
     border-radius: 13px;
     font-size: 20px;
     cursor: pointer;
-    overflow: hidden;
-    position: relative;
-    transform-origin: center;
     background-color: #ececec;
     transition: all .2s ease-in-out;
 }
 
-.btn:active {
+.result-btn:active {
     scale: .97;
 }

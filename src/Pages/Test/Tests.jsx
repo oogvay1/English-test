@@ -1,6 +1,7 @@
 import './Test.css';
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import transition from '../../Transition';
 
 function Tests() {
@@ -10,6 +11,16 @@ function Tests() {
     const [skippedIndexes, setSkippedIndexes] = useState([]);
     const [isReviewingSkipped, setIsReviewingSkipped] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
+    const [correctAnswers, setCorrectAnswers] = useState([]);
+    const [dontKnowCount, setDontKnowCount] = useState(0);
+    const [levelStats, setLevelStats] = useState({
+        Beginner: 0,
+        Elementary: 0,
+        "Pre-intermediate": 0,
+        Intermediate: 0
+    });
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +37,16 @@ function Tests() {
     }, []);
 
     const handleNext = () => {
+        const selectedLetter = selectedOption?.split('.')[0];
+        if (selectedLetter === quest.answer) {
+            setCorrectAnswers(prev => [...prev, quest.id]);
+            const lvl = getLevel().level;
+            setLevelStats(prev => ({
+                ...prev,
+                [lvl]: prev[lvl] + 1
+            }));
+        }
+
         if (currentIndex < questions.length - 1) {
             setCurrentIndex(prev => prev + 1);
             setSelectedOption(null);
@@ -35,20 +56,46 @@ function Tests() {
             setSkippedIndexes(prev => prev.slice(1));
             setSelectedOption(null)
         } else if (skippedIndexes.length === 0 || isReviewingSkipped) {
-            setIsFinished(true);
+            handleFinish();
         }
     };
 
     const handleDontKnow = () => {
+        setDontKnowCount(prev => prev + 1);
+
         if (currentIndex < questions.length - 1) {
             setCurrentIndex(prev => prev + 1);
             setSelectedOption(null);
         } else if (!isReviewingSkipped && skippedIndexes.length > 0) {
-            setCurrentIndex(questions.length);
+            setIsReviewingSkipped(true);
+            setCurrentIndex(skippedIndexes[0]);
+            setSkippedIndexes(prev => prev.slice(1));
+            setSelectedOption(null);
         } else {
-            setIsFinished(true);
+            handleFinish();
         }
     };
+
+    const handleFinish = () => {
+        setIsFinished(true);
+    };
+
+    useEffect(() => {
+        if (isFinished) {
+            const timeout = setTimeout(() => {
+                navigate('/result', {
+                    state: {
+                        correctAnswers,
+                        dontKnowCount,
+                        levelStats
+                    }
+                });
+            }, 10000);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [isFinished]);
+
     const handleSkip = () => {
         if (currentIndex < questions.length - 1) {
             setSkippedIndexes(prev => [...prev, currentIndex]);
@@ -60,9 +107,10 @@ function Tests() {
             setSkippedIndexes(prev => prev.slice(1));
             setSelectedOption(null);
         } else if (skippedIndexes.length === 0 || isReviewingSkipped) {
-            setIsFinished(true);
+            handleFinish();
         }
     };
+
 
     const quest = questions[currentIndex];
     if (!quest) return null
@@ -117,10 +165,7 @@ function Tests() {
                         </div>
                     ) : (
                         <div className="quiz-end">
-                            <h2>All tests over</h2>
-                            <NavLink to="/result">
-                                <button className='result-btn'>Result</button>
-                            </NavLink>
+                            <h2>Ready to see the test results?</h2>
                         </div>
                     )}
                 </div>
