@@ -28,6 +28,7 @@ function Home() {
                                 <i class="ri-arrow-right-line"></i>
                             </button>
                         </NavLink>
+                        <p className='version'>V 1.0 ( Beta )</p>
                     </div>
                 </div>
             </section>
