@@ -1,8 +1,11 @@
 {
   "Users": [
-<<<<<<< HEAD
-   
-=======
->>>>>>> 87e7b1aec91cf78059d5c2209bf7611688d1ed1e
+    {
+      "id": "28f7",
+      "name": "Azimbek",
+      "lastname": "Alibekov",
+      "birthdate": "2010-09-12",
+      "age": 14
+    }
   ]
 }
