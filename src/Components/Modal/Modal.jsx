@@ -34,6 +34,7 @@ function Modal() {
     const data = useFetch(url);
     let inputRef = useRef([]);
     let ageRef = useRef(null);
+    let navigate = useNavigate();
     let [errorAge, setErrorAge] = useState(false);
 
     let [form, setForm] = useState(
@@ -178,7 +179,7 @@ function Modal() {
                                 </label>
                             </div>
 
-                            <button className='submit-btn' onClick={() => checkAge()}> Submit</button>
+                            <button className='submit-btn' onClick={() => { checkAge(); isValid && navigate('/tests') }}> Submit</button>
                         </form>
                     </div>
                 </div>

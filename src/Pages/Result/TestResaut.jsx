@@ -1,9 +1,27 @@
+import { useEffect, useState } from 'react';
 import './TestResult.css';
 import { useLocation, NavLink } from 'react-router-dom';
 
 function TestResult() {
   const location = useLocation();
   const { correctAnswers, dontKnowCount } = location.state || {};
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:8080/Users');
+        const json = await res.json();
+        setQuestions(json);
+      } catch (err) {
+        console.error("Xatolik:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log(questions.length)
+  let lengh = questions.length;
 
   return (
     <section>
@@ -14,7 +32,12 @@ function TestResult() {
         <div className="result-box">
           <div className="result-card">
             <div className="results">
-              <h2>To‘g‘ri javoblar: {correctAnswers?.length || 0}</h2>
+              <h2>
+                {questions.length > 0 && (
+                  <li>{questions[questions.length - 1].name}</li>
+                )}
+              </h2>
+
               <h2>“Don't Know”lar soni: {dontKnowCount || 0}</h2>
             </div>
             <div className="buttons">
