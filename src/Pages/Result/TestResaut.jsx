@@ -34,7 +34,7 @@ function TestResult() {
             <div className="results">
               <h2>
                 {questions.length > 0 && (
-                  <li>{questions[questions.length - 1].name}</li>
+                  <h2>{questions[questions.length - 1].name} {questions[questions.length - 1].lastname}</h2>
                 )}
               </h2>
 
