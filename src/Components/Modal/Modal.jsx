@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import transition from '../../Transition';
 import './Modal.css'
 import useFetch from '../../Hooks/useFetch';
@@ -24,7 +24,7 @@ function validObj(obj) {
     }
 
     return true;
-}
+} 
 
 
 function Modal() {

@@ -104,16 +104,19 @@ function Tests() {
     }, [isFinished]);
 
     const handleSkip = () => {
+        setSkippedIndexes(prev => [...prev, currentIndex]);
+
         if (currentIndex < questions.length - 1) {
-            setSkippedIndexes(prev => [...prev, currentIndex]);
             setCurrentIndex(prev => prev + 1);
             setSelectedOption(null);
-        } else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
+        }
+        else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
             setIsReviewingSkipped(true);
-            setCurrentIndex(skippedIndexes[0]);
-            setSkippedIndexes(prev => prev.slice(1));
+            const [firstSkipped, ...rest] = skippedIndexes;
+            setCurrentIndex(firstSkipped);
+            setSkippedIndexes(rest);
             setSelectedOption(null);
-        } else if (skippedIndexes.length === 0 || isReviewingSkipped) {
+        } else if ((skippedIndexes.length === 0 && isReviewingSkipped) || questions.length === 0) {
             handleFinish();
         }
     };

@@ -1,9 +1,7 @@
 import './Home.css'
-import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import transition from '../../Transition';
 import Modal from '../../Components/Modal/Modal';
-import { useState } from 'react';
 
 function Home() {
 

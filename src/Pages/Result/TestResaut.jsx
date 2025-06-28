@@ -4,7 +4,7 @@ import { useLocation, NavLink } from 'react-router-dom';
 
 function TestResult() {
   const location = useLocation();
-  const { correctAnswers, dontKnowCount } = location.state || {};
+  const { correctAnswers } = location.state || {};
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function TestResult() {
                 )}
               </h2>
 
-              <h2>“Don't Know”lar soni: {dontKnowCount || 0}</h2>
+              <h2>Your result: {correctAnswers} / {lengh}</h2>
             </div>
             <div className="buttons">
               <NavLink to={'/'}>
