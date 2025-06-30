@@ -4,7 +4,7 @@ import { useLocation, NavLink } from 'react-router-dom';
 
 function TestResult() {
   const location = useLocation();
-  const { correctAnswers, dontKnowCount } = location.state || {};
+  const { correctAnswers, dontKnowCount, levelStats } = location.state || {};
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -20,8 +20,11 @@ function TestResult() {
 
     fetchData();
   }, []);
-  console.log(questions.length)
-  let lengh = questions.length;
+
+  let overall = {
+
+  };
+  console.log(levelStats)
 
   return (
     <section>
@@ -32,17 +35,17 @@ function TestResult() {
         <div className="result-box">
           <div className="result-card">
             <div className="results">
-              <h2>
-                {questions.length > 0 && (
-                  <h2>{questions[questions.length - 1].name} {questions[questions.length - 1].lastname}</h2>
-                )}
-              </h2>
+              {questions.length > 0 && (
+                <h2>{questions[questions.length - 1].name} {questions[questions.length - 1].lastname}</h2>
+              )}
+
+              <h2>{correctAnswers}</h2>
 
               <h2>“Don't Know”lar soni: {dontKnowCount || 0}</h2>
             </div>
             <div className="buttons">
               <NavLink to={'/'}>
-                <button className='seve-btn'>Seve to back home</button>
+                <button className='seve-btn'>Save to back home</button>
               </NavLink>
             </div>
           </div>

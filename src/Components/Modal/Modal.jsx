@@ -50,9 +50,23 @@ function Modal() {
         (el) => el && el.value.trim() !== ''
     ) && form.age < 100;
 
+    const checkAge = () => {
+        const age = form.age;
+
+        if (age > 70 || age < 0) {
+            setErrorAge(true);
+            return false;
+        } else {
+            setErrorAge(false);
+            return true;
+        }
+    }
+
     const saveData = async (e) => {
         e.preventDefault();
-        setSaved(true);
+        if (checkAge) {
+            
+        }
 
         inputRef.current.forEach(el => {
             if (el && el.value.trim() === '') {
@@ -131,16 +145,6 @@ function Modal() {
         }
     };
 
-    function checkAge() {
-        const today = new Date(form.birthdate)
-
-        if (today <= 1920) {
-            setErrorAge(true);
-        } else {
-            setErrorAge(false)
-        }
-    }
-
     return (
         <>
             <div className="main-modal">
@@ -179,7 +183,7 @@ function Modal() {
                                 </label>
                             </div>
 
-                            <button className='submit-btn' onClick={() => { checkAge(); isValid && navigate('/tests') }}> Submit</button>
+                            <button className='submit-btn' onClick={() => { if (checkAge()) navigate('/tests') }}> Submit</button>
                         </form>
                     </div>
                 </div>

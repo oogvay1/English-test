@@ -13,7 +13,7 @@ function Tests() {
     const [isFinished, setIsFinished] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [dontKnowCount, setDontKnowCount] = useState(0);
-    const [countdown, setCountdown] = useState(10);
+    const [countdown, setCountdown] = useState(1);
     const [levelStats, setLevelStats] = useState({
 
         Beginner: 0,
