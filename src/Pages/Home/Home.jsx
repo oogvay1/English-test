@@ -2,6 +2,7 @@ import './Home.css'
 import { NavLink } from 'react-router-dom';
 import transition from '../../Transition';
 import Modal from '../../Components/Modal/Modal';
+import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
 
 function Home() {
 
@@ -24,7 +25,7 @@ function Home() {
                 </div>
             </section>
             <video className='video' autoPlay muted loop width="100%">
-                <source src="src/assets/imgs/ace4939aefe5a2c294d49273022c3503.mp4" type="video/mp4" />
+                <source src={video} type="video/mp4" />
             </video>
         </>
     );

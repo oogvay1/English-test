@@ -3,6 +3,7 @@ import transition from '../../Transition';
 import './Modal.css';
 import useFetch from '../../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
+import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
 
 function Modal() {
     const [url, setUrl] = useState('http://localhost:8080/Users');
@@ -156,7 +157,7 @@ function Modal() {
             </div>
 
             <video className='video' autoPlay muted loop width="100%">
-                <source src="src/assets/imgs/ace4939aefe5a2c294d49273022c3503.mp4" type="video/mp4" />
+                <source src={video} type="video/mp4" />
             </video>
         </>
     );

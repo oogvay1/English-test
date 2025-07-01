@@ -2,6 +2,7 @@ import './Test.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import transition from '../../Transition';
+import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
 
 function Tests() {
     const [questions, setQuestions] = useState([]);
@@ -136,7 +137,7 @@ function Tests() {
     return (
         <section>
             <video className='video' autoPlay muted loop width="100%">
-                <source src="src/assets/imgs/ace4939aefe5a2c294d49273022c3503.mp4" type="video/mp4" />
+                <source src={video} type="video/mp4" />
             </video>
             <div className="container">
                 <div className="quiz-box">

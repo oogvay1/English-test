@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './TestResult.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
 
 function TestResult() {
   const location = useLocation();
@@ -84,7 +85,7 @@ function TestResult() {
   return (
     <section>
       <video className='video' autoPlay muted loop width="100%">
-        <source src="src/assets/imgs/ace4939aefe5a2c294d49273022c3503.mp4" type="video/mp4" />
+        <source src={video} type="video/mp4" />
       </video>
       <div className="container">
         <div className="result-box">
