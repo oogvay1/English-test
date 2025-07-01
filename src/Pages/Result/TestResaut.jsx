@@ -8,12 +8,29 @@ function TestResult() {
   const { correctAnswers = [], levelStats = {}, totalScore = 0 } = location.state || {};
   const [questions, setQuestions] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
+  const [level, setLevel] = useState('');
 
   useEffect(() => {
     if (!location.state) {
       navigate('/');
+    } else {
+      determineLevel(correctAnswers.length);
     }
-  }, [location, navigate]);
+  }, [location, navigate, correctAnswers.length]);
+
+  const determineLevel = (correctCount) => {
+    if (correctCount >= 1 && correctCount <= 9) {
+      setLevel('Beginner');
+    } else if (correctCount >= 10 && correctCount <= 21) {
+      setLevel('Elementary');
+    } else if (correctCount >= 22 && correctCount <= 34) {
+      setLevel('Pre-intermediate');
+    } else if (correctCount >= 35) {
+      setLevel('Intermediate');
+    } else {
+      setLevel('No Level');
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,10 +48,8 @@ function TestResult() {
   const AddData = async () => {
     if (questions.length === 0) return;
 
-    // get last user info
     const user = questions[questions.length - 1];
 
-    // compose data
     const newResult = {
       name: user.name,
       lastname: user.lastname,
@@ -42,7 +57,8 @@ function TestResult() {
       birthdate: user.birthdate,
       phoneNumber: user.phone,
       score: Math.floor(totalScore),
-      correctAnswers: correctAnswers.length
+      correctAnswers: correctAnswers.length,
+      level: level
     };
 
     try {
@@ -62,6 +78,7 @@ function TestResult() {
     } catch (error) {
       console.error('Error adding user:', error);
     }
+    navigate('/');
   }
 
   return (
@@ -78,12 +95,13 @@ function TestResult() {
               )}
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
+              <h2 className='answers-text'>Your Level: {level}</h2>
             </div>
             <div className="buttons">
               <button
                 style={{ color: "black" }}
                 className='save-btn'
-                onClick={() => { AddData; navigate('/') }}
+                onClick={AddData}
                 disabled={isSaved}
               >
                 {isSaved ? "Saved!" : "Save and go home"}
