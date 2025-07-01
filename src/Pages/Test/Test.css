@@ -181,3 +181,19 @@ body {
 .result-btn:active {
     scale: .97;
 }
+
+.end-test h2 {
+    font-size: 50px;
+}
+
+.finish-btn {
+    width: 200px;
+    height: 40px;
+    border: none;
+    color: black;
+    font-size: 20px;
+    transform: translateY(320px);
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #fff;
+}

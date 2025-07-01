@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import './TestResult.css';
-import { useLocation, NavLink, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
   const { correctAnswers = [], levelStats = {}, totalScore = 0 } = location.state || {};
   const [questions, setQuestions] = useState([]);
-  const [result, setResult] = useState([]);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (!location.state) {
@@ -28,19 +28,41 @@ function TestResult() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('http://localhost:7777/Result');
-        const json = await res.json();
-        setResult(json);
-      } catch (err) {
-        console.error("Xatolik:", err);
-      }
-    };
-    fetchData();
-  }, []);
+  const AddData = async () => {
+    if (questions.length === 0) return;
 
+    // get last user info
+    const user = questions[questions.length - 1];
+
+    // compose data
+    const newResult = {
+      name: user.name,
+      lastname: user.lastname,
+      age: user.age,
+      birthdate: user.birthdate,
+      phoneNumber: user.phone,
+      score: Math.floor(totalScore),
+      correctAnswers: correctAnswers.length
+    };
+
+    try {
+      const response = await fetch('http://localhost:7777/Result', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newResult)
+      });
+
+      if (!response.ok) throw new Error('Failed to add user');
+
+      const data = await response.json();
+      console.log('Added data:', data);
+      setIsSaved(true);
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
+  }
 
   return (
     <section>
@@ -55,12 +77,17 @@ function TestResult() {
                 <h2 className='result-name'>{questions[questions.length - 1].name} {questions[questions.length - 1].lastname}</h2>
               )}
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
-              <h2 className='answers-text'>Total Score: {totalScore}</h2>
+              <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
             </div>
             <div className="buttons">
-              <NavLink to={'/'}>
-                <button style={{ color: "black" }} className='save-btn'>Save to back home</button>
-              </NavLink>
+              <button
+                style={{ color: "black" }}
+                className='save-btn'
+                onClick={() => { AddData; navigate('/') }}
+                disabled={isSaved}
+              >
+                {isSaved ? "Saved!" : "Save and go home"}
+              </button>
             </div>
           </div>
         </div>

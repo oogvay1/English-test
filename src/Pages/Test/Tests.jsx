@@ -7,9 +7,10 @@ function Tests() {
     const [questions, setQuestions] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
-    const [skippedIndexes, setSkippedIndexes] = useState([]);
+    const [skippedQuestions, setSkippedQuestions] = useState([]);
     const [isReviewingSkipped, setIsReviewingSkipped] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
+    const [showEndButton, setShowEndButton] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [dontKnowCount, setDontKnowCount] = useState(0);
     const [countdown, setCountdown] = useState(1);
@@ -52,7 +53,7 @@ function Tests() {
     };
 
     const handleNext = () => {
-        const quest = questions[currentIndex];
+        const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
         const selectedLetter = selectedOption?.split('.')[0];
         const currentLevel = getLevel();
 
@@ -65,49 +66,43 @@ function Tests() {
             setTotalScore(prev => prev + currentLevel.score);
         }
 
-        if (currentIndex < questions.length - 1) {
-            setCurrentIndex(prev => prev + 1);
-            setSelectedOption(null);
-        } else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
-            setIsReviewingSkipped(true);
-            setCurrentIndex(skippedIndexes[0]);
-            setSkippedIndexes(prev => prev.slice(1));
-            setSelectedOption(null);
-        } else {
-            handleFinish();
-        }
+        goToNextQuestion();
+    };
+
+    const handleSkip = () => {
+        const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
+        setSkippedQuestions(prev => [...prev, quest]);
+
+        goToNextQuestion();
     };
 
     const handleDontKnow = () => {
         setDontKnowCount(prev => prev + 1);
-
-        if (currentIndex < questions.length - 1) {
-            setCurrentIndex(prev => prev + 1);
-            setSelectedOption(null);
-        } else if (!isReviewingSkipped && skippedIndexes.length > 0) {
-            setIsReviewingSkipped(true);
-            setCurrentIndex(skippedIndexes[0]);
-            setSkippedIndexes(prev => prev.slice(1));
-            setSelectedOption(null);
-        } else {
-            handleFinish();
-        }
+        goToNextQuestion();
     };
 
-    const handleSkip = () => {
-        setSkippedIndexes(prev => [...prev, currentIndex]);
-
-        if (currentIndex < questions.length - 1) {
-            setCurrentIndex(prev => prev + 1);
-            setSelectedOption(null);
-        } else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
-            setIsReviewingSkipped(true);
-            const [firstSkipped, ...rest] = skippedIndexes;
-            setCurrentIndex(firstSkipped);
-            setSkippedIndexes(rest);
-            setSelectedOption(null);
+    const goToNextQuestion = () => {
+        if (isReviewingSkipped) {
+            if (currentIndex < skippedQuestions.length - 1) {
+                setCurrentIndex(prev => prev + 1);
+                setSelectedOption(null);
+            } else {
+                // Reached end of skipped questions
+                setShowEndButton(true);
+            }
         } else {
-            handleFinish();
+            if (currentIndex < questions.length - 1) {
+                setCurrentIndex(prev => prev + 1);
+                setSelectedOption(null);
+            } else if (skippedQuestions.length > 0) {
+                // Start reviewing skipped questions
+                setIsReviewingSkipped(true);
+                setCurrentIndex(0);
+                setSelectedOption(null);
+            } else {
+                // No skipped questions, show end button
+                setShowEndButton(true);
+            }
         }
     };
 
@@ -116,29 +111,27 @@ function Tests() {
     };
 
     useEffect(() => {
+        let timer;
         if (isFinished) {
-            const timer = setInterval(() => {
-                setCountdown(prev => {
-                    if (prev === 1) {
-                        clearInterval(timer);
-                        navigate('/result', {
-                            state: {
-                                correctAnswers,
-                                dontKnowCount,
-                                levelStats,
-                                totalScore
-                            }
-                        });
-                    }
-                    return prev - 1;
-                });
-            }, 1000);
-            return () => clearInterval(timer);
+            setCountdown(prev => {
+                if (prev === 1) {
+                    clearInterval(timer);
+                    navigate('/result', {
+                        state: {
+                            correctAnswers,
+                            dontKnowCount,
+                            levelStats,
+                            totalScore
+                        }
+                    });
+                }
+                return prev - 1;
+            });
         }
     }, [isFinished, correctAnswers, dontKnowCount, levelStats, totalScore, navigate]);
 
-    const quest = questions[currentIndex];
-    if (!quest) return null;
+    const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
+    if (!quest && !showEndButton) return null;
 
     return (
         <section>
@@ -147,35 +140,39 @@ function Tests() {
             </video>
             <div className="container">
                 <div className="quiz-box">
-                    {!isFinished ? (
+                    {!isFinished && (
                         <div className="quiz-card">
-                            <div className="queestions">
-                                <h2>{quest.question}</h2>
-                                <div className="options">
-                                    {quest.options.map((opt, i) => (
-                                        <label key={i}>
-                                            <input
-                                                name='options'
-                                                type="radio"
-                                                value={opt}
-                                                checked={selectedOption === opt}
-                                                onChange={() => setSelectedOption(opt)}
-                                            />
-                                            {opt}
-                                        </label>
-                                    ))}
+                            {showEndButton ? (
+                                <div className="end-test">
+                                    <h2>Test finished!</h2>
+                                    <button className='finish-btn' onClick={handleFinish}>Go to Results</button>
                                 </div>
-                            </div>
-                            <div className="line"></div>
-                            <div className="buttons">
-                                <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
-                                <button id='skip-btn' onClick={handleSkip} disabled={selectedOption !== null}>Skip</button>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="quiz-end">
-                            <h2>Ready to see the test results?</h2>
-                            <p>{countdown}</p>
+                            ) : (
+                                <>
+                                    <div className="queestions">
+                                        <h2>{quest.question}</h2>
+                                        <div className="options">
+                                            {quest.options.map((opt, i) => (
+                                                <label key={i}>
+                                                    <input
+                                                        name='options'
+                                                        type="radio"
+                                                        value={opt}
+                                                        checked={selectedOption === opt}
+                                                        onChange={() => setSelectedOption(opt)}
+                                                    />
+                                                    {opt}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="line"></div>
+                                    <div className="buttons">
+                                        <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
+                                        <button id='skip-btn' onClick={handleSkip}>Skip</button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     )}
                 </div>

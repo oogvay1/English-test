@@ -21,4 +21,4 @@ function TestResult() {
   )
 }
 
-export default TestResult
+export default transition(TestResult)

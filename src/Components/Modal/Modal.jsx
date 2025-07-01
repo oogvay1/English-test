@@ -18,7 +18,7 @@ function Modal() {
         lastname: "",
         birthdate: '',
         age: '',
-        phone: '' // ✅ only phone input kept
+        phone: ''
     };
 
     const [form, setForm] = useState(initial);
