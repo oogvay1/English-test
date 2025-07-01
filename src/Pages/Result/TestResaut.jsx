@@ -105,7 +105,7 @@ function TestResult() {
                 onClick={AddData}
                 disabled={isSaved}
               >
-                {isSaved ? "Saved!" : "Save and go home"}
+                {isSaved ? "Saved!" : "Save and go to study"}
               </button>
             </div>
           </div>

@@ -21,6 +21,17 @@
       "score": 25,
       "correctAnswers": 13,
       "level": "Elementary"
+    },
+    {
+      "id": "bc96",
+      "name": "AZIZ",
+      "lastname": "YULDASHOV",
+      "age": 32,
+      "birthdate": "1993-05-13",
+      "phoneNumber": "97-4549463",
+      "score": 17,
+      "correctAnswers": 10,
+      "level": "Elementary"
     }
   ]
 }

@@ -262,6 +262,14 @@
       "birthdate": "2000-04-10",
       "age": 25,
       "phone": "888888888"
+    },
+    {
+      "id": "6a52",
+      "name": "AZIZ",
+      "lastname": "YULDASHOV",
+      "birthdate": "1993-05-13",
+      "age": 32,
+      "phone": "97-4549463"
     }
   ]
 }

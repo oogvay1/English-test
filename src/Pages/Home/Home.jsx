@@ -11,7 +11,7 @@ function Home() {
             <section className='section'>
                 <div className="container">
                     <div className="section-inner">
-                        <h1>Al Aziz Academy Test</h1>
+                        <h1>Al-Aziz Academy Test</h1>
                         <p>Click the button below and start the preview test</p>
                         <NavLink to="/login">
                             <button className='btn' >
@@ -20,7 +20,6 @@ function Home() {
                                 <i class="ri-arrow-right-line"></i>
                             </button>
                         </NavLink>
-                        <p className='version'>V 1.0 ( Beta )</p>
                     </div>
                 </div>
             </section>
