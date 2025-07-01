@@ -64,9 +64,6 @@ function Modal() {
 
     const saveData = async (e) => {
         e.preventDefault();
-        if (checkAge) {
-            
-        }
 
         inputRef.current.forEach(el => {
             if (el && el.value.trim() === '') {
