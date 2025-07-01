@@ -1,6 +1,5 @@
 import './Test.css';
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import transition from '../../Transition';
 
@@ -14,8 +13,9 @@ function Tests() {
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [dontKnowCount, setDontKnowCount] = useState(0);
     const [countdown, setCountdown] = useState(1);
-    const [levelStats, setLevelStats] = useState({
+    const [totalScore, setTotalScore] = useState(0);
 
+    const [levelStats, setLevelStats] = useState({
         Beginner: 0,
         Elementary: 0,
         "Pre-intermediate": 0,
@@ -34,19 +34,35 @@ function Tests() {
                 console.error("Xatolik:", err);
             }
         };
-
         fetchData();
     }, []);
 
+    const levels = [
+        { level: "Beginner", score: 1.5 },
+        { level: "Elementary", score: 1.7 },
+        { level: "Pre-intermediate", score: 2.0 },
+        { level: "Intermediate", score: 2.5 }
+    ];
+
+    const getLevel = () => {
+        if (currentIndex <= 8) return levels[0];
+        if (currentIndex <= 20) return levels[1];
+        if (currentIndex <= 33) return levels[2];
+        return levels[3];
+    };
+
     const handleNext = () => {
+        const quest = questions[currentIndex];
         const selectedLetter = selectedOption?.split('.')[0];
+        const currentLevel = getLevel();
+
         if (selectedLetter === quest.answer) {
             setCorrectAnswers(prev => [...prev, quest.id]);
-            const lvl = getLevel().level;
             setLevelStats(prev => ({
                 ...prev,
-                [lvl]: prev[lvl] + 1
+                [currentLevel.level]: prev[currentLevel.level] + 1
             }));
+            setTotalScore(prev => prev + currentLevel.score);
         }
 
         if (currentIndex < questions.length - 1) {
@@ -56,8 +72,8 @@ function Tests() {
             setIsReviewingSkipped(true);
             setCurrentIndex(skippedIndexes[0]);
             setSkippedIndexes(prev => prev.slice(1));
-            setSelectedOption(null)
-        } else if (skippedIndexes.length === 0 || isReviewingSkipped) {
+            setSelectedOption(null);
+        } else {
             handleFinish();
         }
     };
@@ -78,9 +94,27 @@ function Tests() {
         }
     };
 
+    const handleSkip = () => {
+        setSkippedIndexes(prev => [...prev, currentIndex]);
+
+        if (currentIndex < questions.length - 1) {
+            setCurrentIndex(prev => prev + 1);
+            setSelectedOption(null);
+        } else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
+            setIsReviewingSkipped(true);
+            const [firstSkipped, ...rest] = skippedIndexes;
+            setCurrentIndex(firstSkipped);
+            setSkippedIndexes(rest);
+            setSelectedOption(null);
+        } else {
+            handleFinish();
+        }
+    };
+
     const handleFinish = () => {
         setIsFinished(true);
     };
+
     useEffect(() => {
         if (isFinished) {
             const timer = setInterval(() => {
@@ -91,49 +125,20 @@ function Tests() {
                             state: {
                                 correctAnswers,
                                 dontKnowCount,
-                                levelStats
+                                levelStats,
+                                totalScore
                             }
                         });
                     }
                     return prev - 1;
                 });
             }, 1000);
-
             return () => clearInterval(timer);
         }
-    }, [isFinished]);
-
-    const handleSkip = () => {
-        if (currentIndex < questions.length - 1) {
-            setSkippedIndexes(prev => [...prev, currentIndex]);
-            setCurrentIndex(prev => prev + 1);
-            setSelectedOption(null);
-        } else if (skippedIndexes.length > 0 && !isReviewingSkipped) {
-            setIsReviewingSkipped(true);
-            setCurrentIndex(skippedIndexes[0]);
-            setSkippedIndexes(prev => prev.slice(1));
-            setSelectedOption(null);
-        } else if (skippedIndexes.length === 0 || isReviewingSkipped) {
-            handleFinish();
-        }
-    };
-
+    }, [isFinished, correctAnswers, dontKnowCount, levelStats, totalScore, navigate]);
 
     const quest = questions[currentIndex];
-    if (!quest) return null
-    const level = [
-        { level: "Beginner", score: 1.5 },
-        { level: "Elementary", score: 1.7 },
-        { level: "Pre-intermediate", score: 2.0 },
-        { level: "Intermediate", score: 2.5 }
-    ];
-
-    const getLevel = () => {
-        if (currentIndex <= 8) return level[0];
-        if (currentIndex <= 20) return level[1];
-        if (currentIndex <= 33) return level[2];
-        return level[3];
-    };
+    if (!quest) return null;
 
     return (
         <section>
@@ -144,13 +149,10 @@ function Tests() {
                 <div className="quiz-box">
                     {!isFinished ? (
                         <div className="quiz-card">
-                            <h1>{getLevel().level} - {getLevel().score} ball</h1>
                             <div className="queestions">
-                                <h2>
-                                    {quest ? quest.question : "Yuklanmoqda..."}
-                                </h2>
+                                <h2>{quest.question}</h2>
                                 <div className="options">
-                                    {quest && quest.options.map((opt, i) => (
+                                    {quest.options.map((opt, i) => (
                                         <label key={i}>
                                             <input
                                                 name='options'
@@ -164,16 +166,16 @@ function Tests() {
                                     ))}
                                 </div>
                             </div>
+                            <div className="line"></div>
                             <div className="buttons">
-                                <button id='dont-btn' onClick={handleDontKnow}>Don't Know</button>
                                 <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
-                                <button id='skip-btn' onClick={handleSkip}>Skip</button>
+                                <button id='skip-btn' onClick={handleSkip} disabled={selectedOption !== null}>Skip</button>
                             </div>
                         </div>
                     ) : (
                         <div className="quiz-end">
                             <h2>Ready to see the test results?</h2>
-                            <p>{countdown} </p>
+                            <p>{countdown}</p>
                         </div>
                     )}
                 </div>

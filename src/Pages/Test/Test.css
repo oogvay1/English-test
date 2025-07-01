@@ -60,7 +60,14 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     gap: 20px;
-    border-bottom: 1px solid #fff;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    margin-top: 25px;
+    margin-bottom: -25px;
+    background-color: #ffffff;
 }
 
 .queestions h2 {
@@ -71,20 +78,28 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 0 70px;
+    padding: 20px;
 }
 
 .options label {
     display: flex;
     gap: 20px;
+    color: black;
+    height: 30px;
+    padding: 20px;
+    width: 800px;
+    margin-inline: auto;
+    border-radius: 10px;
+    align-items: center;
     cursor: pointer;
+    background-color: #ffffff;
 }
 
 /*  *** Button  *** */
 
 .buttons {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-around;
     height: 120px;
 }
@@ -108,6 +123,7 @@ body {
     color: black;
     height: 50px;
     width: 150px;
+    font-size: 20px;
 }
 
 #next-btn:disabled {
@@ -125,33 +141,27 @@ body {
     background-color: #ffffff;
 }
 
+#next-btn:disabled #dont-btn {
+    background-color: #ffffff;
+}
+
+#skip-btn:disabled {
+    cursor: not-allowed;
+}
+
 #next-btn:hover {
     background-color: #171717;
 }
 
-#next-btn:disabled ~ #dont-btn {
-    background-color: #ffffff;
-}
-
 #skip-btn {
-    background-color: #9a9a9a;
-    height: 35px;
-    width: 130px;
+    background-color: #4b4b4b;
+    height: 50px;
+    width: 150px;
     color: black;
     font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#dont-btn {
-    background-color: #9a9a9a;
-    height: 35px;
-    width: 130px;
-    color: #000000;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
 }
 
 .result-btn{
@@ -163,6 +173,7 @@ body {
     border-radius: 13px;
     font-size: 20px;
     cursor: pointer;
+    color: black;
     background-color: #ececec;
     transition: all .2s ease-in-out;
 }

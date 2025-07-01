@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
 import './TestResult.css';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 
 function TestResult() {
   const location = useLocation();
-  const { correctAnswers, dontKnowCount, levelStats } = location.state || {};
+  const navigate = useNavigate();
+  const { correctAnswers = [], levelStats = {}, totalScore = 0 } = location.state || {};
   const [questions, setQuestions] = useState([]);
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    if (!location.state) {
+      navigate('/');
+    }
+  }, [location, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,14 +25,22 @@ function TestResult() {
         console.error("Xatolik:", err);
       }
     };
-
     fetchData();
   }, []);
 
-  let overall = {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:7777/Result');
+        const json = await res.json();
+        setResult(json);
+      } catch (err) {
+        console.error("Xatolik:", err);
+      }
+    };
+    fetchData();
+  }, []);
 
-  };
-  console.log(levelStats)
 
   return (
     <section>
@@ -36,16 +52,14 @@ function TestResult() {
           <div className="result-card">
             <div className="results">
               {questions.length > 0 && (
-                <h2>{questions[questions.length - 1].name} {questions[questions.length - 1].lastname}</h2>
+                <h2 className='result-name'>{questions[questions.length - 1].name} {questions[questions.length - 1].lastname}</h2>
               )}
-
-              <h2>{correctAnswers}</h2>
-
-              <h2>“Don't Know”lar soni: {dontKnowCount || 0}</h2>
+              <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
+              <h2 className='answers-text'>Total Score: {totalScore}</h2>
             </div>
             <div className="buttons">
               <NavLink to={'/'}>
-                <button className='seve-btn'>Save to back home</button>
+                <button style={{ color: "black" }} className='save-btn'>Save to back home</button>
               </NavLink>
             </div>
           </div>

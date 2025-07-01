@@ -1,11 +1,11 @@
 import { Route, Router, Routes, useLocation } from "react-router-dom"
 import Layout from "./Layouts/Layout"
 import { Home, Test } from './Pages/Index'
-import { motion } from "framer-motion"
 import { AnimatePresence } from "framer-motion"
 import Header from "./Components/Header/Header";
 import Modal from "./Components/Modal/Modal"
 import TestResult from "./Pages/Result/TestResaut"
+
 function App() {
 
   const location = useLocation();
