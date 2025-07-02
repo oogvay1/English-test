@@ -17,6 +17,15 @@ body {
     filter: brightness(.5);
 }
 
+.result-name {
+    font-size: 50px;
+    margin-bottom: 2rem;
+}
+
+.answers-text {
+    font-size: 30px;
+}
+
 .result-box {
     display: flex;
     flex-direction: column;
@@ -49,7 +58,9 @@ body {
     gap: px;
 }
 
-.seve-btn{
+.save-btn{
+    width: 220px;
     height: 40px;
-    background-color: green;
+    font-size: 20px;
+    background-color: #fff;
 }

@@ -1,0 +1,37 @@
+{
+  "Result": [
+    {
+      "id": "5614",
+      "name": "fdghfdgh",
+      "lastname": "fdghfdgh",
+      "age": -19986,
+      "birthdate": "22010-12-12",
+      "phoneNumber": "fdghfdgh",
+      "score": 29,
+      "correctAnswers": 15,
+      "level": "Elementary"
+    },
+    {
+      "id": "55d2",
+      "name": "Ali",
+      "lastname": "Valiyev",
+      "age": 25,
+      "birthdate": "2000-04-10",
+      "phoneNumber": "888888888",
+      "score": 25,
+      "correctAnswers": 13,
+      "level": "Elementary"
+    },
+    {
+      "id": "bc96",
+      "name": "AZIZ",
+      "lastname": "YULDASHOV",
+      "age": 32,
+      "birthdate": "1993-05-13",
+      "phoneNumber": "97-4549463",
+      "score": 17,
+      "correctAnswers": 10,
+      "level": "Elementary"
+    }
+  ]
+}

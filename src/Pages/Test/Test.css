@@ -60,7 +60,14 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     gap: 20px;
-    border-bottom: 1px solid #fff;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    margin-top: 25px;
+    margin-bottom: -25px;
+    background-color: #ffffff;
 }
 
 .queestions h2 {
@@ -71,20 +78,28 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 0 70px;
+    padding: 20px;
 }
 
 .options label {
     display: flex;
     gap: 20px;
+    color: black;
+    height: 30px;
+    padding: 20px;
+    width: 800px;
+    margin-inline: auto;
+    border-radius: 10px;
+    align-items: center;
     cursor: pointer;
+    background-color: #ffffff;
 }
 
 /*  *** Button  *** */
 
 .buttons {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-around;
     height: 120px;
 }
@@ -100,36 +115,53 @@ body {
 
 .buttons button:active {
     margin-top: 10px;
-    box-shadow: 0px -5px 0px rgba(85, 75, 75, 0.581);
+    box-shadow: 0px -5px 0px #554b4b94;
 }
 
 #next-btn {
-    background-color: green;
+    background-color: #ffffff;
+    color: black;
     height: 50px;
     width: 150px;
+    font-size: 20px;
 }
 
 #next-btn:disabled {
-    background-color: rgb(83, 99, 83);
+    background-color: #000000;
     color: white;
-    border: 1px solid rgb(0, 67, 0);
+    border: 1px solid #ffffff;
+    cursor: not-allowed;
+}
+
+#next-btn:disabled ~ #skip-btn {
+    background-color: #ffffff;
+}
+
+#next-btn:disabled ~ #skip-btn {
+    background-color: #ffffff;
+}
+
+#next-btn:disabled #dont-btn {
+    background-color: #ffffff;
+}
+
+#skip-btn:disabled {
     cursor: not-allowed;
 }
 
 #next-btn:hover {
-    background-color: rgb(0, 67, 0);
+    background-color: #171717;
 }
 
 #skip-btn {
-    background-color: blue;
-    height: 35px;
-    width: 130px;
-}
-
-#dont-btn {
-    background-color: red;
-    height: 35px;
-    width: 130px;
+    background-color: #4b4b4b;
+    height: 50px;
+    width: 150px;
+    color: black;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .result-btn{
@@ -141,10 +173,27 @@ body {
     border-radius: 13px;
     font-size: 20px;
     cursor: pointer;
+    color: black;
     background-color: #ececec;
     transition: all .2s ease-in-out;
 }
 
 .result-btn:active {
     scale: .97;
+}
+
+.end-test h2 {
+    font-size: 50px;
+}
+
+.finish-btn {
+    width: 200px;
+    height: 40px;
+    border: none;
+    color: black;
+    font-size: 20px;
+    transform: translateY(320px);
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #fff;
 }

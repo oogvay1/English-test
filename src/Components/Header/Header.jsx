@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import img from '../../assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png';
 import './Header.css'
 
 function Header() {
@@ -10,7 +11,7 @@ function Header() {
                     <div className="header-inner">
                         <div className="header-logo">
                             <NavLink to="/" >
-                                <img src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="" />
+                                <img src={img} alt="" />
                                 <h1>Quizz</h1>
                             </NavLink>
                         </div>
