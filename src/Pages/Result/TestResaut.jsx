@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './TestResult.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
+import transition from '../../Transition';
 
 function TestResult() {
   const location = useLocation();
@@ -115,4 +116,4 @@ function TestResult() {
   );
 }
 
-export default TestResult;
+export default transition(TestResult);
