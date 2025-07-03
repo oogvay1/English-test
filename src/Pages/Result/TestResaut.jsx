@@ -7,7 +7,7 @@ import transition from '../../Transition';
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correctAnswers = [], levelStats = {}, totalScore = 0, userId } = location.state || {};
+  const { correctAnswers = [], setLevelStats, levelStats = {}, totalScore = 0, userId } = location.state || {};
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
@@ -33,7 +33,7 @@ function TestResult() {
       setLevel('No Level');
     }
   }
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -100,6 +100,7 @@ function TestResult() {
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
               <h2 className='answers-text'>Your Level: {level}</h2>
+              <h2 className='answers-text'>{levelStats.Beginner}</h2>
             </div>
             <div className="buttons">
               <button

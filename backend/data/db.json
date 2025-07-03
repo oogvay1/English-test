@@ -1,12 +1,5 @@
 {
   "Users": [
-    {
-      "id": "28f7",
-      "name": "Azimbek",
-      "lastname": "Alibekov",
-      "birthdate": "2010-09-12",
-      "age": 14
-    }
   ],
   "questions": {
     "Beginner": [
@@ -130,7 +123,7 @@
           "B. saw",
           "C. seen"
         ],
-        "answer": "D"
+        "answer": "C"
       },
       {
         "id": 13,
@@ -550,28 +543,6 @@
   },
   "Result": [
     {
-      "id": "5614",
-      "name": "fdghfdgh",
-      "lastname": "fdghfdgh",
-      "age": -19986,
-      "birthdate": "22010-12-12",
-      "phoneNumber": "fdghfdgh",
-      "score": 29,
-      "correctAnswers": 15,
-      "level": "Elementary"
-    },
-    {
-      "id": "55d2",
-      "name": "Ali",
-      "lastname": "Valiyev",
-      "age": 25,
-      "birthdate": "2000-04-10",
-      "phoneNumber": "888888888",
-      "score": 25,
-      "correctAnswers": 13,
-      "level": "Elementary"
-    },
-    {
       "id": "bc96",
       "name": "AZIZ",
       "lastname": "YULDASHOV",
@@ -580,117 +551,6 @@
       "phoneNumber": "97-4549463",
       "score": 17,
       "correctAnswers": 10,
-      "level": "Elementary"
-    },
-    {
-      "id": "a4d5",
-      "name": "sdfgdfg",
-      "lastname": "dfgdgh",
-      "age": 14,
-      "birthdate": "2010-12-12",
-      "phoneNumber": "dfghdfg",
-      "score": 31,
-      "correctAnswers": 16,
-      "level": "Elementary"
-    },
-    {
-      "id": "e4ff",
-      "name": "Azimbek",
-      "lastname": "Alibekov",
-      "age": 14,
-      "birthdate": "2010-09-12",
-      "phoneNumber": "77-777-77-77",
-      "score": 31,
-      "correctAnswers": 16,
-      "level": "Elementary"
-    },
-    {
-      "id": "7e2a",
-      "score": 31,
-      "correctAnswers": 16,
-      "level": "Elementary"
-    },
-    {
-      "id": "82e6",
-      "score": 31,
-      "correctAnswers": 16,
-      "level": "Elementary"
-    },
-    {
-      "id": "b8d5",
-      "name": "Alibekov",
-      "lastname": "Alibekov",
-      "age": 14,
-      "birthdate": "2010-12-12",
-      "phoneNumber": "1212121212",
-      "score": 42,
-      "correctAnswers": 23,
-      "level": "Pre-intermediate"
-    },
-    {
-      "id": "429a",
-      "name": "Alibekov",
-      "lastname": "Alibekov",
-      "age": 14,
-      "birthdate": "2010-12-12",
-      "phoneNumber": "1212121212",
-      "score": 28,
-      "correctAnswers": 15,
-      "level": "Elementary"
-    },
-    {
-      "id": "e6f2",
-      "name": "Arnold",
-      "lastname": "Shvartsniiggger",
-      "age": 64,
-      "birthdate": "1960-09-12",
-      "phoneNumber": "90909090",
-      "score": 29,
-      "correctAnswers": 15,
-      "level": "Elementary"
-    },
-    {
-      "id": "5b8f",
-      "name": "Elnur",
-      "lastname": "Alibekov",
-      "age": 25,
-      "birthdate": "2000-01-12",
-      "phoneNumber": "99090909",
-      "score": 29,
-      "correctAnswers": 15,
-      "level": "Elementary"
-    },
-    {
-      "id": "4252",
-      "name": "Hehe boy",
-      "lastname": "hehe",
-      "age": 24,
-      "birthdate": "2000-09-12",
-      "phoneNumber": "2094934593",
-      "score": 32,
-      "correctAnswers": 16,
-      "level": "Elementary"
-    },
-    {
-      "id": "084f",
-      "name": "AAAAA",
-      "lastname": "AAAAAA",
-      "age": 14,
-      "birthdate": "2010-12-12",
-      "phoneNumber": "AAAAAAAAA",
-      "score": 29,
-      "correctAnswers": 14,
-      "level": "Elementary"
-    },
-    {
-      "id": "4e0f",
-      "name": "Ali",
-      "lastname": "Teshaboev",
-      "age": 14,
-      "birthdate": "2010-09-12",
-      "phoneNumber": "77777777",
-      "score": 25,
-      "correctAnswers": 14,
       "level": "Elementary"
     },
     {
