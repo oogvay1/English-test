@@ -145,7 +145,7 @@ function Modal() {
                                 </label>
                             </div>
 
-                            <button className='submit-btn'>Submit</button>
+                            <button className='submit-btn' onClick={saveData}>Submit</button>
                         </form>
                     </div>
                 </div>
