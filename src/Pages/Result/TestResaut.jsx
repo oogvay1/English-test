@@ -33,7 +33,7 @@ function TestResult() {
       setLevel('No Level');
     }
   }
-
+console.log(levelStats)
   useEffect(() => {
     const fetchData = async () => {
       try {
