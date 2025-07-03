@@ -117,6 +117,7 @@ function Tests() {
                     navigate('/result', {
                         state: {
                             correctAnswers,
+                            setLevelStats,
                             dontKnowCount,
                             levelStats,
                             totalScore,
