@@ -29,7 +29,7 @@ function Tests() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('http://localhost:3000/questions');
+                const res = await fetch('http://localhost:8080/questions');
                 const json = await res.json();
                 setQuestions(json[0]);
             } catch (err) {
@@ -88,7 +88,6 @@ function Tests() {
                 setCurrentIndex(prev => prev + 1);
                 setSelectedOption(null);
             } else {
-                // Reached end of skipped questions
                 setShowEndButton(true);
             }
         } else {
@@ -96,12 +95,10 @@ function Tests() {
                 setCurrentIndex(prev => prev + 1);
                 setSelectedOption(null);
             } else if (skippedQuestions.length > 0) {
-                // Start reviewing skipped questions
                 setIsReviewingSkipped(true);
                 setCurrentIndex(0);
                 setSelectedOption(null);
             } else {
-                // No skipped questions, show end button
                 setShowEndButton(true);
             }
         }
@@ -122,7 +119,8 @@ function Tests() {
                             correctAnswers,
                             dontKnowCount,
                             levelStats,
-                            totalScore
+                            totalScore,
+                            userId: localStorage.getItem("userId")
                         }
                     });
                 }

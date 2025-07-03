@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import './TestResult.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
+import transition from '../../Transition';
 
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correctAnswers = [], levelStats = {}, totalScore = 0 } = location.state || {};
-  const [questions, setQuestions] = useState([]);
+  const { correctAnswers = [], levelStats = {}, totalScore = 0, userId } = location.state || {};
+  const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
 
@@ -36,35 +37,35 @@ function TestResult() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:8080/Users');
+        const res = await fetch(`http://localhost:8080/Users/${userId}`);
         const json = await res.json();
-        setQuestions(json);
+        setUserData(json);
       } catch (err) {
         console.error("Xatolik:", err);
       }
     };
-    fetchData();
-  }, []);
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
 
 
   const AddData = async () => {
-    if (questions.length === 0) return;
-
-    const user = questions[questions.length - 1];
+    if (!userData) return;
 
     const newResult = {
-      name: user.name,
-      lastname: user.lastname,
-      age: user.age,
-      birthdate: user.birthdate,
-      phoneNumber: user.phone,
+      name: userData.name,
+      lastname: userData.lastname,
+      age: userData.age,
+      birthdate: userData.birthdate,
+      phoneNumber: userData.phone,
       score: Math.floor(totalScore),
       correctAnswers: correctAnswers.length,
       level: level
     };
 
     try {
-      const response = await fetch('http://localhost:7777/Result', {
+      const response = await fetch('http://localhost:8080/Result', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -80,6 +81,7 @@ function TestResult() {
     } catch (error) {
       console.error('Error adding user:', error);
     }
+
     navigate('/');
   }
 
@@ -92,8 +94,8 @@ function TestResult() {
         <div className="result-box">
           <div className="result-card">
             <div className="results">
-              {questions.length > 0 && (
-                <h2 className='result-name'>{questions[questions.length - 1].name} {questions[questions.length - 1].lastname}</h2>
+              {userData && (
+                <h2 className='result-name'>{userData.name} {userData.lastname}</h2>
               )}
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
@@ -116,4 +118,4 @@ function TestResult() {
   );
 }
 
-export default TestResult;
+export default transition(TestResult);
