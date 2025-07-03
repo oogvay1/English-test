@@ -99,6 +99,7 @@ function TestResult() {
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
               <h2 className='answers-text'>Your Level: {level}</h2>
+              <h2 className='answers-text'>{levelStats.Beginner}</h2>
             </div>
             <div className="buttons">
               <button
