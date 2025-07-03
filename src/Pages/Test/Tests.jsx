@@ -15,29 +15,29 @@ function Tests() {
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [countdown, setCountdown] = useState(1);
     const [totalScore, setTotalScore] = useState(0);
-
+    
     const [levelStats, setLevelStats] = useState({
         Beginner: 0,
         Elementary: 0,
         "Pre-intermediate": 0,
         Intermediate: 0
     });
-
+    
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await fetch('https://english-test-11.onrender.com/questions');
                 const json = await res.json();
-                setQuestions(json[0]);
+                setQuestions(json);
             } catch (err) {
                 console.error("Xatolik:", err);
             }
         };
         fetchData();
     }, []);
-
+    
     const levels = [
         { level: "Beginner", score: 1.5 },
         { level: "Elementary", score: 1.7 },
