@@ -88,7 +88,6 @@ function Tests() {
                 setCurrentIndex(prev => prev + 1);
                 setSelectedOption(null);
             } else {
-                // Reached end of skipped questions
                 setShowEndButton(true);
             }
         } else {
@@ -96,12 +95,10 @@ function Tests() {
                 setCurrentIndex(prev => prev + 1);
                 setSelectedOption(null);
             } else if (skippedQuestions.length > 0) {
-                // Start reviewing skipped questions
                 setIsReviewingSkipped(true);
                 setCurrentIndex(0);
                 setSelectedOption(null);
             } else {
-                // No skipped questions, show end button
                 setShowEndButton(true);
             }
         }
