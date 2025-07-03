@@ -2,7 +2,7 @@
   "name": "json-backend",
   "version": "1.0.0",
   "scripts": {
-    "start": "cross-env json-server --watch ./data/db.json --port $PORT"
+    "start": "node server.js"
   },
   "dependencies": {
     "json-server": "^0.17.0"

@@ -29,7 +29,7 @@ function Tests() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('http://localhost:8080/questions');
+                const res = await fetch('https://english-test-11.onrender.com/questions');
                 const json = await res.json();
                 setQuestions(json[0]);
             } catch (err) {

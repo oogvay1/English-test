@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 
 function Modal() {
-    const [url, setUrl] = useState('http://localhost:8080/Users');
+    const [url, setUrl] = useState('https://english-test-11.onrender.com/Users');
     const [saved, setSaved] = useState(false);
     const data = useFetch(url);
     const inputRef = useRef([]);
@@ -22,6 +22,8 @@ function Modal() {
         phone: ''
     };
 
+    const filial = ["Niyozbosh", "Gulbahor", "Xalqabod", "Do`stobod", "Olmazor", "Kasblar", "Kids", "Konditerski", "Chinoz"];
+
     const [form, setForm] = useState(initial);
 
     const isValid = inputRef.current.every(
@@ -31,7 +33,14 @@ function Modal() {
     const saveData = async (e) => {
         e.preventDefault();
 
+        if (form.age > 80) {
+            setErrorAge(true);
+        } else {
+            setErrorAge(false);
+        }
+
         if (isValid) {
+
             try {
                 const response = await fetch(url, {
                     method: "POST",

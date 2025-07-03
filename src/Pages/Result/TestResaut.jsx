@@ -37,7 +37,7 @@ function TestResult() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/Users/${userId}`);
+        const res = await fetch(`https://english-test-11.onrender.com/Users/${userId}`);
         const json = await res.json();
         setUserData(json);
       } catch (err) {
@@ -65,7 +65,7 @@ function TestResult() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/Result', {
+      const response = await fetch('https://english-test-11.onrender.com/Result', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
