@@ -64,7 +64,7 @@ function TestResult() {
     };
 
     try {
-      const response = await fetch('http://localhost:7777/Result', {
+      const response = await fetch('http://localhost:8080/Result', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

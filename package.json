@@ -5,11 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "concurrently \"npm run json1\" \"npm run json2\" \"npm run json3\"",
-    "json1": "json-server --watch ./data/db.json --port 8080",
-    "json2": "json-server --watch ./data/question.json --port 3000",
-    "json3": "json-server --watch ./data/result.json --port 7777",
-    "all-json": "concurrently \"npm run json1\" \"npm run json2\" \"npm run json3\"",
+    "server": "json-server --watch ./data/db.json --port 8080",
     "build": "vite build",
     "lint": "eslint .",
     "client": "vite",
