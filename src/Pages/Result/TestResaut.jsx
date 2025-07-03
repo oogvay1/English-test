@@ -46,6 +46,7 @@ function TestResult() {
     fetchData();
   }, []);
 
+
   const AddData = async () => {
     if (questions.length === 0) return;
 

@@ -65,28 +65,7 @@ body {
     filter: brightness(.5);
 }
 
-@media screen and (max-width: 1600px) {
-    .video {
-        rotate: 180deg;
-        height: 100vh;
-        scale: 1;
-    }
-}
 
-@media screen and (max-width: 1500px) {
-    .video {
-        rotate: 180deg;
-        height: 100vh;
-        scale: 1;
-    }
-}
-
-@media screen and (max-width: 1400px) {
-    .video {
-        rotate: 180deg;
-        height: 100vh;
-    }
-}
 
 @media screen and (max-width: 1300px) {
     .video {
