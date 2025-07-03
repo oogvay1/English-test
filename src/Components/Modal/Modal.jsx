@@ -3,7 +3,7 @@ import transition from '../../Transition';
 import './Modal.css';
 import useFetch from '../../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
-import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
+import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 
 function Modal() {
     const [url, setUrl] = useState('http://localhost:8080/Users');
@@ -44,9 +44,9 @@ function Modal() {
                 if (!response.ok) throw new Error('Failed to add user');
 
                 const data = await response.json();
-                console.log('User added:', data);
-
+                localStorage.setItem("userId", data.id);
                 setForm(initial);
+                navigate('/tests');
             } catch (error) {
                 console.error('Error adding user:', error);
             }
@@ -104,8 +104,6 @@ function Modal() {
                     <div className="container">
                         <form className="form" onSubmit={saveData}>
                             <div className="form-inputs">
-
-                                {/* Name */}
                                 <label className='name'>
                                     <input ref={(el) => {
                                         if (el && !inputRef.current.includes(el)) {
@@ -116,7 +114,6 @@ function Modal() {
                                     <i className="ri-user-line"></i>
                                 </label>
 
-                                {/* Lastname */}
                                 <label className='name'>
                                     <input ref={(el) => {
                                         if (el && !inputRef.current.includes(el)) {
@@ -127,7 +124,6 @@ function Modal() {
                                     <i className="ri-user-line"></i>
                                 </label>
 
-                                {/* Phone */}
                                 <label className='name'>
                                     <input ref={(el) => {
                                         if (el && !inputRef.current.includes(el)) {
@@ -138,7 +134,6 @@ function Modal() {
                                     <i className="ri-phone-line"></i>
                                 </label>
 
-                                {/* Birthdate */}
                                 <label ref={ageRef} className='name'>
                                     <input ref={(el) => {
                                         if (el && !inputRef.current.includes(el)) {
@@ -150,7 +145,7 @@ function Modal() {
                                 </label>
                             </div>
 
-                            <button className='submit-btn' onClick={() => { if (isValid) navigate('/tests') }}>Submit</button>
+                            <button className='submit-btn'>Submit</button>
                         </form>
                     </div>
                 </div>

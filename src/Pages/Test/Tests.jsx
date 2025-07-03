@@ -119,7 +119,8 @@ function Tests() {
                             correctAnswers,
                             dontKnowCount,
                             levelStats,
-                            totalScore
+                            totalScore,
+                            userId: localStorage.getItem("userId")
                         }
                     });
                 }
