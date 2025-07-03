@@ -13,7 +13,6 @@ function Tests() {
     const [isFinished, setIsFinished] = useState(false);
     const [showEndButton, setShowEndButton] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState([]);
-    const [dontKnowCount, setDontKnowCount] = useState(0);
     const [countdown, setCountdown] = useState(1);
     const [totalScore, setTotalScore] = useState(0);
 
@@ -75,12 +74,7 @@ function Tests() {
         setSkippedQuestions(prev => [...prev, quest]);
 
         goToNextQuestion();
-    };
-
-    const handleDontKnow = () => {
-        setDontKnowCount(prev => prev + 1);
-        goToNextQuestion();
-    };
+    }
 
     const goToNextQuestion = () => {
         if (isReviewingSkipped) {
@@ -117,7 +111,6 @@ function Tests() {
                     navigate('/result', {
                         state: {
                             correctAnswers,
-                            dontKnowCount,
                             levelStats,
                             totalScore,
                             userId: localStorage.getItem("userId")
@@ -127,7 +120,7 @@ function Tests() {
                 return prev - 1;
             });
         }
-    }, [isFinished, correctAnswers, dontKnowCount, levelStats, totalScore, navigate]);
+    }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
 
     const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
     if (!quest && !showEndButton) return null;
