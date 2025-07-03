@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "json-server --watch ./data/db.json --port 8080",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "client": "vite",
