@@ -1,0 +1,10 @@
+{
+  "name": "json-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cross-env json-server --watch ./data/db.json --port $PORT"
+  },
+  "dependencies": {
+    "json-server": "^0.17.0"
+  }
+}
