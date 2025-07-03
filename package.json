@@ -4,12 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "concurrently \"npm run json1\" \"npm run json2\" \"npm run json3\"",
+    "json1": "json-server --watch ./data/db.json --port 8080",
+    "json2": "json-server --watch ./data/question.json --port 3000",
+    "json3": "json-server --watch ./data/result.json --port 7777",
+    "all-json": "concurrently \"npm run json1\" \"npm run json2\" \"npm run json3\"",
     "build": "vite build",
     "lint": "eslint .",
+    "client": "vite",
     "preview": "vite preview"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "framer-motion": "^12.18.1",
     "gsap": "^3.13.0",
     "lenis": "^1.3.4",
@@ -23,6 +30,7 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
+    "concurrently": "^9.2.0",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
