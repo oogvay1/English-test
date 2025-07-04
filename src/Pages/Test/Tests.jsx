@@ -38,7 +38,6 @@ function Tests() {
                 const res = await fetch('https://english-test-11.onrender.com/questions');
                 const json = await res.json();
 
-                // Flatten and add level property
                 const combinedQuestions = [
                     ...json.Beginner.map(q => ({ ...q, level: "Beginner" })),
                     ...json.Elementary.map(q => ({ ...q, level: "Elementary" })),
@@ -150,6 +149,7 @@ function Tests() {
                             ) : (
                                 <>
                                     <div className="questions">
+                                        <h2>{quest.level}</h2>
                                         <h2>{quest.question}</h2>
                                         <div className="options">
                                             {quest.options.map((opt, i) => (

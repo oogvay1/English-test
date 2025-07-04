@@ -48,6 +48,7 @@ function TestResult() {
       fetchData();
     }
   }, [userId]);
+  console.log(userData)
 
 
   const AddData = async () => {
