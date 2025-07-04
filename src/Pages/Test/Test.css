@@ -70,8 +70,13 @@ body {
     background-color: #ffffff;
 }
 
-.queestions h2 {
+.queestion {
     text-align: start;
+}
+.level{
+    box-shadow: 0px 5px 10px #2d2d2d94;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .options {
