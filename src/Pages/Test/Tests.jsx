@@ -121,10 +121,10 @@ function Tests() {
             });
         }
     }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
-
+    
     const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
     if (!quest && !showEndButton) return null;
-
+    
     return (
         <section>
             <video className='video' autoPlay muted loop width="100%">
@@ -142,9 +142,9 @@ function Tests() {
                             ) : (
                                 <>
                                     <div className="queestions">
-                                        <h2>{quest.question}</h2>
+                                        <h2></h2>
                                         <div className="options">
-                                            {quest.options.map((opt, i) => (
+                                            {quest.Beginner.options.map((opt, i) => (
                                                 <label key={i}>
                                                     <input
                                                         name='options'
