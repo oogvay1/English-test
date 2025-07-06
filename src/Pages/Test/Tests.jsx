@@ -14,7 +14,6 @@ function Tests() {
     const [showEndButton, setShowEndButton] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [totalScore, setTotalScore] = useState(0);
-    const [levelSelected, setLevelSelected] = useState(null);
     const [allLevels, setAllLevels] = useState({})
     const [levelStats, setLevelStats] = useState({
         Beginner: 0,
@@ -38,15 +37,6 @@ function Tests() {
                 const res = await fetch('https://english-test-11.onrender.com/questions');
                 const json = await res.json();
                 setAllLevels(json);
-
-                const combinedQuestions = [
-                    ...json.Beginner.map(q => ({ ...q, level: "Beginner" })),
-                    ...json.Elementary.map(q => ({ ...q, level: "Elementary" })),
-                    ...json["Pre-Intermediate"].map(q => ({ ...q, level: "Pre-intermediate" })),
-                    ...json.Intermediate.map(q => ({ ...q, level: "Intermediate" }))
-                ];
-
-                setQuestions(combinedQuestions);
             } catch (err) {
                 console.error("Xatolik:", err);
             }
