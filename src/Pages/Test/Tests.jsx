@@ -169,7 +169,8 @@ function Tests() {
                                     <div className="line"></div>
                                     <div className="buttons">
                                         <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
-                                        <button id='skip-btn' onClick={handleSkip}>Skip</button>
+                                        <button id='skip-btn' onClick={handleSkip} disabled={selectedOption !== null}>Skip</button>
+                                        <button onClick={handleFinish}>Finish</button>
                                     </div>
                                 </>
                             )}
