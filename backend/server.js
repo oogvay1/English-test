@@ -17,9 +17,9 @@ server.use(middlewares);
 
 // ✅ Custom route to send Telegram message
 server.post("/send-result", async (req, res) => {
-    const { name, score, total, level } = req.body;
+    const { name, lastname, age, birthdate, phoneNumber, correctAnswers, category, branch, score, level } = req.body;
 
-    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n📊 Score: ${score}/${total}\n📈 Level: ${level}`;
+    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n Lastname: ${lastname}\n  Age: ${age}\n Birthdate: ${birthdate}\n Phone-Number: ${phoneNumber}\n Correct Answers: ${correctAnswers}\n Category: ${category}\n Branch: ${branch}\n📊 Score: ${score}/${50}\n📈 Level: ${level}`;
 
     try {
         await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
