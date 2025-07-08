@@ -27,7 +27,6 @@ function TestResult() {
     }
   };
 
-  // 🚀 Load user info and determine level
   useEffect(() => {
     if (!location.state) {
       navigate('/');
@@ -48,7 +47,6 @@ function TestResult() {
     if (userId) fetchData();
   }, [location, userId]);
 
-  // ✅ Add data and send to Telegram
   const AddData = async () => {
     if (!userData) return;
 
@@ -64,9 +62,9 @@ function TestResult() {
       category: userData.category,
       branch: userData.branch
     };
+    console.log(newResult)
 
     try {
-      // 1. Save to JSON database
       const response = await fetch('https://english-test-11.onrender.com/Result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -75,16 +73,10 @@ function TestResult() {
 
       if (!response.ok) throw new Error('Failed to save result');
 
-      // 2. Send to Telegram
       await fetch('https://english-test-11.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: userData.name,
-          score: correctAnswers.length,
-          total: 40,
-          level
-        })
+        body: JSON.stringify(newResult)
       });
 
       setIsSaved(true);
