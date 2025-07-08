@@ -14,7 +14,9 @@ function Tests() {
     const [showEndButton, setShowEndButton] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [totalScore, setTotalScore] = useState(0);
-    const [allLevels, setAllLevels] = useState({})
+    const [countdown, setCountdown] = useState()
+    const [allLevels, setAllLevels] = useState({});
+    const [Levelselected, setLevelSelected] = useState();
     const [levelStats, setLevelStats] = useState({
         Beginner: 0,
         Elementary: 0,
@@ -47,7 +49,7 @@ function Tests() {
     const getLevel = (quest) => {
         return levels.find(l => l.level === quest.level);
     };
-    
+
     const handleLevelSelect = (combo) => {
         setLevelSelected(combo);
 
