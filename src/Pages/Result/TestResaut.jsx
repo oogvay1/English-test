@@ -47,9 +47,9 @@ function TestResult() {
     if (userId) {
       fetchData();
     }
-  }, [userId]);
-  console.log(userData)
+  }, [userId]); 
 
+  console.log(userData && userData)
 
   const AddData = async () => {
     if (!userData) return;
