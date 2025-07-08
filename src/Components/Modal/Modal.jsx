@@ -114,9 +114,10 @@ function Modal() {
     useEffect(() => {
         setForm({
             ...form,
-            branch: branchName
+            branch: branchName,
+            category: categoryName
         })
-    }, [branchName]);
+    }, [branchName, categoryName])
 
     const [branch, setBranch] = useState([]);
     const text = useRef(null);
@@ -126,14 +127,14 @@ function Modal() {
 
         li.forEach((el, index) => {
             el.addEventListener('click', () => {
-                branch.push(el.textContent);
-                document.querySelector('.ul').classList.remove('open');
+                branch.push(el.textContent)
+                document.querySelector('.ul').classList.remove('open')
                 text.current.style.filter = "blur(0px)";
                 document.querySelector('.ul').classList.add('close');
-                document.querySelectorAll('.name').forEach(el => el.style.filter = 'blur(0px)');
+                document.querySelectorAll('.name').forEach(el => el.style.filter = 'blur(0px)')
                 cateRef.current.style.filter = "blur(0px)";
                 let selected = branch[branch.length - 1];
-                setBranchName(selected);
+                setBranchName(selected)
             })
         });
 
@@ -171,7 +172,6 @@ function Modal() {
         })
     }, [])
     const filial = ["Niyozbosh", "Gulbahor", "Xalqabod", "Do`stobod", "Olmazor", "Kasblar", "Kids", "Konditerski", "Chinoz"];
-    const categoryList = ["Beginner", "Beg - Ele", "Ele - Pre-Inter", "Pre-Inter - Inter"]
 
     return (
         <>
@@ -184,18 +184,25 @@ function Modal() {
                                 <div className="drop-down">
                                     <h1 name="branch" ref={text}>{branchName}</h1>
                                     <ul className='ul'>
-                                        {filial.map((el, index) => (
-                                            <li key={index} className='drop-li'>{el}</li>
-                                        ))}
+                                        <li className='drop-li'>Niyozbosh</li>
+                                        <li className='drop-li'>Gulbahor</li>
+                                        <li className='drop-li'>Xalqabod</li>
+                                        <li className='drop-li'>Do`stobod</li>
+                                        <li className='drop-li'>Olmazor</li>
+                                        <li className='drop-li'>Kasblar</li>
+                                        <li className='drop-li'>Kids</li>
+                                        <li className='drop-li'>Konditerski</li>
+                                        <li className='drop-li'>Chinoz</li>
                                     </ul>
                                 </div>
 
                                 <div className="drop-down">
                                     <h1 name="branch" ref={cateRef}>{categoryName}</h1>
                                     <ul className='ul-cate'>
-                                        {categoryList.map((el, index) => (
-                                            <li key={index} className='drop-li2'>{el}</li>
-                                        ))}
+                                        <li className='drop-li2'>Beginner</li>
+                                        <li className='drop-li2'>Beg - Ele</li>
+                                        <li className='drop-li2'>Ele - Pre-Inter</li>
+                                        <li className='drop-li2'>Pre-Inter - Inter</li>
                                     </ul>
                                 </div>
                             </div>
