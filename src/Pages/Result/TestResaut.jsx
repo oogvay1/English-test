@@ -62,7 +62,9 @@ function TestResult() {
       phoneNumber: userData.phone,
       score: Math.floor(totalScore),
       correctAnswers: correctAnswers.length,
-      level: level
+      level: level,
+      category: userData.category,
+      branch: userData.branch
     };
 
     try {
@@ -73,6 +75,7 @@ function TestResult() {
         },
         body: JSON.stringify(newResult)
       });
+      console.log(newResult)
 
       if (!response.ok) throw new Error('Failed to add user');
 
