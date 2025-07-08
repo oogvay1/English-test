@@ -1,25 +1,18 @@
 import { useEffect, useState } from 'react';
 import './TestResult.css';
 import { useLocation, useNavigate } from 'react-router-dom';
-import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
+import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 import transition from '../../Transition';
 
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correctAnswers = [], setLevelStats, levelStats = {}, totalScore = 0, userId } = location.state || {};
+  const { correctAnswers = [], totalScore = 0, userId } = location.state || {};
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
 
-  useEffect(() => {
-    if (!location.state) {
-      navigate('/');
-    } else {
-      determineLevel(correctAnswers.length);
-    }
-  }, [location, navigate, correctAnswers.length]);
-
+  // 🧠 Determine user level based on correct answers
   const determineLevel = (correctCount) => {
     if (correctCount >= 1 && correctCount <= 9) {
       setLevel('Beginner');
@@ -32,25 +25,30 @@ function TestResult() {
     } else {
       setLevel('No Level');
     }
-  }
-  
+  };
+
+  // 🚀 Load user info and determine level
   useEffect(() => {
+    if (!location.state) {
+      navigate('/');
+    } else {
+      determineLevel(correctAnswers.length);
+    }
+
     const fetchData = async () => {
       try {
         const res = await fetch(`https://english-test-11.onrender.com/Users/${userId}`);
         const json = await res.json();
         setUserData(json);
       } catch (err) {
-        console.error("Xatolik:", err);
+        console.error("❌ Error fetching user:", err);
       }
     };
-    if (userId) {
-      fetchData();
-    }
-  }, [userId]); 
 
-  console.log(userData && userData)
+    if (userId) fetchData();
+  }, [location, userId]);
 
+  // ✅ Add data and send to Telegram
   const AddData = async () => {
     if (!userData) return;
 
@@ -62,32 +60,39 @@ function TestResult() {
       phoneNumber: userData.phone,
       score: Math.floor(totalScore),
       correctAnswers: correctAnswers.length,
-      level: level,
+      level,
       category: userData.category,
       branch: userData.branch
     };
 
     try {
+      // 1. Save to JSON database
       const response = await fetch('https://english-test-11.onrender.com/Result', {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
-      console.log(newResult)
 
-      if (!response.ok) throw new Error('Failed to add user');
+      if (!response.ok) throw new Error('Failed to save result');
 
-      const data = await response.json();
-      console.log('Added data:', data);
+      // 2. Send to Telegram
+      await fetch('https://english-test-11.onrender.com/send-result', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: userData.name,
+          score: correctAnswers.length,
+          total: 40,
+          level
+        })
+      });
+
       setIsSaved(true);
-    } catch (error) {
-      console.error('Error adding user:', error);
+      navigate('/');
+    } catch (err) {
+      console.error("❌ Error submitting result:", err);
     }
-
-    navigate('/');
-  }
+  };
 
   return (
     <section>
@@ -104,8 +109,7 @@ function TestResult() {
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
               <h2 className='answers-text'>Your Level: {level}</h2>
-              <h2 className='answers-text'>Category: {userData && userData.category}</h2>
-              <h2 className='answers-text'>{levelStats.Beginner}</h2>
+              <h2 className='answers-text'>Category: {userData?.category}</h2>
             </div>
             <div className="buttons">
               <button
