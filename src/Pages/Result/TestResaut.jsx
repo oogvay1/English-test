@@ -47,9 +47,9 @@ function TestResult() {
     if (userId) {
       fetchData();
     }
-  }, [userId]);
-  console.log(userData)
+  }, [userId]); 
 
+  console.log(userData && userData)
 
   const AddData = async () => {
     if (!userData) return;
@@ -62,7 +62,9 @@ function TestResult() {
       phoneNumber: userData.phone,
       score: Math.floor(totalScore),
       correctAnswers: correctAnswers.length,
-      level: level
+      level: level,
+      category: userData.category,
+      branch: userData.branch
     };
 
     try {
@@ -73,6 +75,7 @@ function TestResult() {
         },
         body: JSON.stringify(newResult)
       });
+      console.log(newResult)
 
       if (!response.ok) throw new Error('Failed to add user');
 
@@ -101,6 +104,7 @@ function TestResult() {
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
               <h2 className='answers-text'>Your Level: {level}</h2>
+              <h2 className='answers-text'>Category: {userData && userData.category}</h2>
               <h2 className='answers-text'>{levelStats.Beginner}</h2>
             </div>
             <div className="buttons">
