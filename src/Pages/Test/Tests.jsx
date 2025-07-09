@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import transition from '../../Transition';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
+import ScrollVelocity from '../../Components/Background/Background';
 
 function Tests() {
     const [questions, setQuestions] = useState([]);
@@ -102,10 +103,6 @@ function Tests() {
         }
     };
 
-    const handleFinish = () => {
-        setIsFinished(true);
-    };
-
     useEffect(() => {
         let timer;
         if (isFinished) {
@@ -134,9 +131,6 @@ function Tests() {
 
     return (
         <section>
-            <video className='video' autoPlay muted loop width="100%">
-                <source src={video} type="video/mp4" />
-            </video>
             <div className="container">
                 <div className="quiz-box">
                     {!isFinished && (
@@ -144,7 +138,7 @@ function Tests() {
                             {showEndButton ? (
                                 <div className="end-test">
                                     <h2>Test finished!</h2>
-                                    <button className='finish-btn' onClick={handleFinish}>Go to Results</button>
+                                    <button className='finish-btn' onClick={() => setIsFinished(true)}>Go to Results</button>
                                 </div>
                             ) : (
                                 <>
@@ -170,7 +164,7 @@ function Tests() {
                                     <div className="buttons">
                                         <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
                                         <button id='skip-btn' onClick={handleSkip} disabled={selectedOption !== null}>Skip</button>
-                                        <button onClick={handleFinish}>Finish</button>
+                                        <button style={{ color: "black" }} className='finish-btn' onClick={() => setShowEndButton(true)}>Finish</button>
                                     </div>
                                 </>
                             )}

@@ -2,12 +2,15 @@ import './Home.css'
 import { NavLink } from 'react-router-dom';
 import transition from '../../Transition';
 import Modal from '../../Components/Modal/Modal';
+import img from '../../assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4'
+import ScrollVelocity from '../../Components/Background/Background';
 
 function Home() {
-
+    console.log(img)
     return (
         <>
+            <div className="filter"></div>
             <section className='section'>
                 <div className="container">
                     <div className="section-inner">
@@ -23,9 +26,6 @@ function Home() {
                     </div>
                 </div>
             </section>
-            <video className='video' autoPlay muted loop width="100%">
-                <source src={video} type="video/mp4" />
-            </video>
         </>
     );
 }
