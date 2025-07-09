@@ -15,11 +15,10 @@ server.use(cors());
 server.use(express.json());
 server.use(middlewares);
 
-// ✅ Custom route to send Telegram message
 server.post("/send-result", async (req, res) => {
-    const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch} = req.body;
+    const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch } = req.body;
 
-    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n Lastname: ${lastname}\n  Age: ${age}\n Birthdate: ${birthdate}\n Phone-Number: ${phoneNumber}\n Correct Answers: ${correctAnswers}\n Category: ${category}\n Branch: ${branch}\n📊 Score: ${score}/${50}\n📈 Level: ${level}`;
+    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${100}\n📈 Level: ${level}`;
     console.log(message)
 
     try {
@@ -36,10 +35,8 @@ server.post("/send-result", async (req, res) => {
     }
 });
 
-// ✅ Default JSON-server routes
 server.use(router);
 
-// ✅ Start the server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`✅ JSON Server running on port ${PORT}`);
