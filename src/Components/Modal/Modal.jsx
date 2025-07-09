@@ -60,7 +60,11 @@ function Modal() {
                 const data = await response.json();
                 localStorage.setItem("userId", data.id);
                 setForm(initial);
-                navigate('/tests');
+                navigate('/tests', {
+                    state: {
+                        selectedLevel: form.category
+                    }
+                });
             } catch (error) {
                 console.error('Error adding user:', error);
             }
@@ -100,7 +104,7 @@ function Modal() {
             });
         }
 
-        if (saved) { 
+        if (saved) {
             inputRef.current.forEach(el => {
                 if (el && el.value.trim() !== '') {
                     el.parentElement.style.borderBottom = '2px solid #fff';
@@ -208,7 +212,6 @@ function Modal() {
                             </div>
 
                             <div className="form-inputs">
-
                                 <label className='name'>
                                     <input ref={(el) => {
                                         if (el && !inputRef.current.includes(el)) {

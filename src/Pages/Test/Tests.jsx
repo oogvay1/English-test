@@ -1,6 +1,7 @@
 import './Test.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import transition from '../../Transition';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 
@@ -25,6 +26,7 @@ function Tests() {
     });
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const levels = [
         { level: "Beginner", score: 1.5 },
@@ -49,6 +51,13 @@ function Tests() {
     const getLevel = (quest) => {
         return levels.find(l => l.level === quest.level);
     };
+
+    useEffect(() => {
+        const selected = location.state?.selectedlevel;
+        if (selected && selected.length > 0) {
+            handleLevelSelect(selected)
+        }
+    })
 
     const handleLevelSelect = (combo) => {
         setLevelSelected(combo);
@@ -218,17 +227,14 @@ function Tests() {
                                 <>
                                     <div className="questions">
                                         <h2 className='level'>{quest.level}</h2>
-                                        <h2 className='queestion'>{quest.question}</h2>
+                                        <h2 className='queestion'>{currentIndex + 1}. {quest.question}</h2>
                                         <div className="options">
                                             {quest.options.map((opt, i) => (
                                                 <label key={i}>
                                                     <input
-                                                        name='options'
-                                                        type="radio"
-                                                        value={opt}
-                                                        checked={selectedOption === opt}
-                                                        onChange={() => setSelectedOption(opt)}
-                                                    />
+                                                        name='options' type="radio"
+                                                        value={opt} checked={selectedOption === opt}
+                                                        onChange={() => setSelectedOption(opt)} />
                                                     {opt}
                                                 </label>
                                             ))}

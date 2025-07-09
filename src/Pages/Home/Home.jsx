@@ -15,9 +15,9 @@ function Home() {
                         <p>Click the button below and start the preview test</p>
                         <NavLink to="/login">
                             <button className='btn' >
-                                <i class="ri-arrow-right-line"></i>
+                                <i className="ri-arrow-right-line"></i>
                                 <p>Start</p>
-                                <i class="ri-arrow-right-line"></i>
+                                <i className="ri-arrow-right-line"></i>
                             </button>
                         </NavLink>
                     </div>
