@@ -54,11 +54,10 @@ function Tests() {
 
     useEffect(() => {
         const selected = location.state?.selectedLevel;
-   
         if (selected && selected.length > 0) {
             handleLevelSelect(selected);
         }
-    })
+    } ,[allLevels]);
 
     const handleLevelSelect = (combo) => {
         setLevelSelected(combo);
