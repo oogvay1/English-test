@@ -1,12 +1,10 @@
 import './Test.css';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import transition from '../../Transition';
-import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
-import ScrollVelocity from '../../Components/Background/Background';
 
 function Tests() {
+    const location = useLocation();
     const [questions, setQuestions] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -16,9 +14,10 @@ function Tests() {
     const [showEndButton, setShowEndButton] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState([]);
     const [totalScore, setTotalScore] = useState(0);
-    const [countdown, setCountdown] = useState()
+    const [countdown, setCountdown] = useState();
     const [allLevels, setAllLevels] = useState({});
     const [Levelselected, setLevelSelected] = useState();
+    const [userLevel, setUserLevel] = useState('');
     const [levelStats, setLevelStats] = useState({
         Beginner: 0,
         Elementary: 0,
@@ -27,7 +26,6 @@ function Tests() {
     });
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     const levels = [
         { level: "Beginner", score: 1.5 },
@@ -41,6 +39,7 @@ function Tests() {
             try {
                 const res = await fetch('https://english-test-11.onrender.com/questions');
                 const json = await res.json();
+                console.log("Fetched questions:", json);
                 setAllLevels(json);
             } catch (err) {
                 console.error("Xatolik:", err);
@@ -48,87 +47,6 @@ function Tests() {
         };
         fetchData();
     }, []);
-
-    const getLevel = (quest) => {
-        return levels.find(l => l.level === quest.level);
-    };
-
-    useEffect(() => {
-        const selected = location.state?.selectedlevel;
-        if (selected && selected.length > 0) {
-            handleLevelSelect(selected)
-        }
-    })
-
-    const handleLevelSelect = (combo) => {
-        setLevelSelected(combo);
-
-        let beginner = [];
-        let elementary = [];
-        let preIntermediate = [];
-        let intermediate = [];
-
-        const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
-
-        switch (combo) {
-            case "Beginner":
-                beginner = allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || [];
-                setQuestions(shuffle(beginner));
-                break;
-
-            case "Elementary":
-                elementary = allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || [];
-                setQuestions(shuffle(elementary));
-                break;
-
-            case "Pre-Intermediate":
-                preIntermediate = allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || [];
-                setQuestions(shuffle(preIntermediate));
-                break;
-
-            case "Intermediate":
-                intermediate = allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || [];
-                setQuestions(shuffle(intermediate));
-                break;
-
-            case "B-E":
-                beginner = shuffle(allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || []);
-                elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
-                setQuestions([...beginner, ...elementary]);
-                break;
-
-            case "E-Pre":
-                elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
-                preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
-                setQuestions([...elementary, ...preIntermediate]);
-                break;
-
-            case "Pre-Int":
-                preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
-                intermediate = shuffle(allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || []);
-                setQuestions([...preIntermediate, ...intermediate]);
-                break;
-
-            case "All":
-                beginner = shuffle(allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || []);
-                elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
-                preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
-                intermediate = shuffle(allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || []);
-                setQuestions([...beginner, ...elementary, ...preIntermediate, ...intermediate]);
-                break;
-
-            default:
-                setQuestions([]);
-        }
-
-        setCurrentIndex(0);
-        setSkippedQuestions([]);
-        setCorrectAnswers([]);
-        setIsReviewingSkipped(false);
-        setShowEndButton(false);
-        setSelectedOption(null);
-    };
-
 
     const handleNext = () => {
         const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
@@ -178,6 +96,7 @@ function Tests() {
     useEffect(() => {
         let timer;
         if (isFinished) {
+            setCountdown(3);
             timer = setInterval(() => {
                 setCountdown(prev => {
                     if (prev === 1) {
@@ -198,8 +117,107 @@ function Tests() {
         return () => clearInterval(timer);
     }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
 
+    useEffect(() => {
+        const userId = localStorage.getItem('userId');
+
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`https://english-test-11.onrender.com/Users/${userId}`);
+                const json = await res.json();
+                console.log(json.category)
+                setUserLevel(json.category);
+            } catch (err) {
+                console.error("Error fetching user:", err);
+            }
+        };
+
+        if (userId) fetchData();
+        console.log(userLevel && userLevel)
+    }, []);
+
+    useEffect(() => {
+        const selected = userLevel;
+
+        if (selected) {
+            handleLevelSelect(selected);
+        }
+    }, [userLevel]);
+
+    const getLevel = (quest) => {
+        return levels.find(l => l.level === quest.level);
+    };
+
+    const handleLevelSelect = (combo) => {
+
+        let beginner = [];
+        let elementary = [];
+        let preIntermediate = [];
+        let intermediate = [];
+
+        const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+
+        switch (combo) {
+            case "Beginner":
+                beginner = allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || [];
+                setQuestions(shuffle(beginner));
+                break;
+            case "Elementary":
+                elementary = allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || [];
+                setQuestions(shuffle(elementary));
+                break;
+            case "Pre-Intermediate":
+                preIntermediate = allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || [];
+                setQuestions(shuffle(preIntermediate));
+                break;
+            case "Intermediate":
+                intermediate = allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || [];
+                setQuestions(shuffle(intermediate));
+                break;
+            case "Beg - Ele":
+                beginner = shuffle(allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || []);
+                elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
+                setQuestions([...beginner, ...elementary]);
+                break;
+            case "Ele - Pre-Inter":
+                elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
+                preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
+                setQuestions([...elementary, ...preIntermediate]);
+                break;
+            case "Pre-Inter - Inter":
+                preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
+                intermediate = shuffle(allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || []);
+                setQuestions([...preIntermediate, ...intermediate]);
+                break;
+            case "All":
+                beginner = shuffle(allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || []);
+                elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
+                preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
+                intermediate = shuffle(allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || []);
+                setQuestions([...beginner, ...elementary, ...preIntermediate, ...intermediate]);
+                break;
+            default:
+                setQuestions([]);
+        }
+
+        setCurrentIndex(0);
+        setSkippedQuestions([]);
+        setCorrectAnswers([]);
+        setIsReviewingSkipped(false);
+        setShowEndButton(false);
+        setSelectedOption(null);
+    };
+
+
     const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
-    if (!quest && !showEndButton) return null;
+
+    if (!quest && !showEndButton) {
+        return (
+            <div style={{ padding: "40px", textAlign: "center" }}>
+                <h1>Loading...</h1>
+                <p>Make sure the server and selected level are working.</p>
+            </div>
+        );
+    }
 
     return (
         <section>
@@ -233,7 +251,7 @@ function Tests() {
                                     <div className="buttons">
                                         <button id='next-btn' onClick={handleNext} disabled={selectedOption === null}>Next</button>
                                         <button id='skip-btn' onClick={handleSkip} disabled={selectedOption !== null}>Skip</button>
-                                        <button style={{ color: "black" }} className='finish-btn' onClick={() => setShowEndButton(true)}>Finish</button>
+                                        <button className='finish-btn' onClick={() => setShowEndButton(true)}>Finish</button>
                                     </div>
                                 </>
                             )}

@@ -11,6 +11,7 @@ function TestResult() {
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
+  const [newResult, setNewResult] = useState({});
 
   // 🧠 Determine user level based on correct answers
   const determineLevel = (correctCount) => {
@@ -47,10 +48,8 @@ function TestResult() {
     if (userId) fetchData();
   }, [location, userId]);
 
-  const AddData = async () => {
-    if (!userData) return;
-
-    const newResult = {
+  useEffect(() => {
+    userData && setNewResult({
       name: userData.name,
       lastname: userData.lastname,
       age: userData.age,
@@ -61,8 +60,11 @@ function TestResult() {
       level,
       category: userData.category,
       branch: userData.branch
-    };
-    console.log(newResult)
+    })
+  }, [userData]);
+
+
+  const AddData = async () => {
 
     try {
       const response = await fetch('https://english-test-11.onrender.com/Result', {
@@ -97,7 +99,7 @@ function TestResult() {
               )}
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
-              <h2 className='answers-text'>Your Level: {level}</h2>
+              {newResult.category == 'All' && <h2 className='answers-text'>Your Level: {level}</h2>}
               <h2 className='answers-text'>Category: {userData?.category}</h2>
             </div>
             <div className="buttons">
