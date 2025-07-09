@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import transition from '../../Transition';
-import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 import ScrollVelocity from '../../Components/Background/Background';
 
 function Tests() {
@@ -54,9 +53,10 @@ function Tests() {
     };
 
     useEffect(() => {
-        const selected = location.state?.selectedlevel;
+        const selected = location.state?.selectedLevel;
+   
         if (selected && selected.length > 0) {
-            handleLevelSelect(selected)
+            handleLevelSelect(selected);
         }
     })
 
