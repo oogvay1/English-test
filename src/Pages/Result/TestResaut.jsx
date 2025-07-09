@@ -40,7 +40,7 @@ function TestResult() {
         const json = await res.json();
         setUserData(json);
       } catch (err) {
-        console.error("❌ Error fetching user:", err);
+        console.error("Error fetching user:", err);
       }
     };
 
@@ -88,9 +88,6 @@ function TestResult() {
 
   return (
     <section>
-      <video className='video' autoPlay muted loop width="100%">
-        <source src={video} type="video/mp4" />
-      </video>
       <div className="container">
         <div className="result-box">
           <div className="result-card">

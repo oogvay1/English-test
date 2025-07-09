@@ -208,7 +208,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 1;
     z-index: 99;
     width: 300px;
-    height: 500px;
+    height: 300px;
 }
 
 .ul-cate {
@@ -220,7 +220,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 1;
     z-index: 99;
     width: 300px;
-    height: 240px;
+    height: 300px;
 }
 
 .drop-li:hover {

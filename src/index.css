@@ -34,6 +34,15 @@ body {
     width: 100%;
 }
 
+.filter {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    z-index: -1;
+    position: absolute;
+    backdrop-filter: blur(15px);
+}
+
 .slide-in {
     position: fixed;
     top: 0;

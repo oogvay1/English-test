@@ -4,6 +4,7 @@ import './Modal.css';
 import useFetch from '../../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
+import ScrollVelocity from '../Background/Background';
 
 function Modal() {
     const [url, setUrl] = useState('https://english-test-11.onrender.com/Users');
@@ -178,7 +179,7 @@ function Modal() {
         })
     }, [])
     const filial = ["Niyozbosh", "Gulbahor", "Xalqabod", "Do`stobod", "Olmazor", "Kasblar", "Kids", "Konditerski", "Chinoz"];
-    const categoryList = ["Beginner", "Beg - Ele", "Ele - Pre-Inter", "Pre-Inter - Inter"]
+    const categoryList = ["Beginner", "Beg - Ele", "Ele - Pre-Inter", "Pre-Inter - Inter", "All"]
 
     return (
         <>
@@ -254,10 +255,6 @@ function Modal() {
                     </div>
                 </div>
             </div>
-
-            <video className='video' autoPlay muted loop width="100%">
-                <source src={video} type="video/mp4" />
-            </video>
         </>
     );
 }
