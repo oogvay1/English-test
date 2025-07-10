@@ -189,7 +189,7 @@ function Tests() {
             setCountdown(3);
             setCountdown(prev => {
                 if (prev === 1) {
-                    if (totalLenght) {
+                    if (totalLenght > 0) {
                         navigate('/result', {
                             state: {
                                 correctAnswers,
