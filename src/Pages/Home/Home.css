@@ -29,6 +29,7 @@ body {
     flex-direction: column;
     gap: 20px;
     text-align: center;
+    padding: 0 10px;
 }
 
 .section-inner h1 {
@@ -116,4 +117,26 @@ body {
     position: absolute;
     bottom: 20px;
     right: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    .section-inner h1 {
+        font-size: 60px;
+    }
+    
+    .section-inner p {
+        font-size: 30px;
+    }
+    
+}
+
+@media screen and (max-width: 700px) {
+    .section-inner h1 {
+        font-size: 50px;
+    }
+    
+    .section-inner p {
+        font-size: 25px;
+    }
+    
 }

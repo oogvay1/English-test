@@ -18,6 +18,7 @@ function Tests() {
     const [allLevels, setAllLevels] = useState({});
     const [Levelselected, setLevelSelected] = useState();
     const [userLevel, setUserLevel] = useState('');
+    const [totalLenght, setTotalLenght] = useState(0);
     const [levelStats, setLevelStats] = useState({
         Beginner: 0,
         Elementary: 0,
@@ -37,7 +38,7 @@ function Tests() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('https://english-test-11.onrender.com/questions');
+                const res = await fetch('https://english-test-13.onrender.com/questions');
                 const json = await res.json();
                 console.log("Fetched questions:", json);
                 setAllLevels(json);
@@ -94,35 +95,11 @@ function Tests() {
     };
 
     useEffect(() => {
-        let timer;
-        if (isFinished) {
-            setCountdown(3);
-            timer = setInterval(() => {
-                setCountdown(prev => {
-                    if (prev === 1) {
-                        clearInterval(timer);
-                        navigate('/result', {
-                            state: {
-                                correctAnswers,
-                                levelStats,
-                                totalScore,
-                                userId: localStorage.getItem("userId")
-                            }
-                        });
-                    }
-                    return prev - 1;
-                });
-            }, 1000);
-        }
-        return () => clearInterval(timer);
-    }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
-
-    useEffect(() => {
         const userId = localStorage.getItem('userId');
 
         const fetchData = async () => {
             try {
-                const res = await fetch(`https://english-test-11.onrender.com/Users/${userId}`);
+                const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
                 const json = await res.json();
                 console.log(json.category)
                 setUserLevel(json.category);
@@ -198,7 +175,6 @@ function Tests() {
             default:
                 setQuestions([]);
         }
-
         setCurrentIndex(0);
         setSkippedQuestions([]);
         setCorrectAnswers([]);
@@ -206,6 +182,25 @@ function Tests() {
         setShowEndButton(false);
         setSelectedOption(null);
     };
+    useEffect(() => {
+        setTotalLenght(questions && questions.length);
+        console.log(totalLenght && totalLenght)
+        if (isFinished) {
+            setCountdown(3);
+            setCountdown(prev => {
+                navigate('/result', {
+                    state: {
+                        correctAnswers,
+                        levelStats,
+                        totalScore,
+                        totalLenght,
+                        userId: localStorage.getItem("userId")
+                    }
+                });
+                return prev - 1;
+            });
+        }
+    }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
 
 
     const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];

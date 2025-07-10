@@ -60,7 +60,7 @@
 .name {
     width: 260px;
     display: flex;
-    align-items: center;  
+    align-items: center;
     height: 42px;
     gap: 10px;
     border-bottom: 2px solid #ffffff;
@@ -143,7 +143,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     top: 250px;
 }
 
-.ul, .ul-cate {
+.ul,
+.ul-cate {
     width: 260px;
     transform: translateX(42px);
     height: 0;
@@ -180,7 +181,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: all .1s ease-in-out;
 }
 
-.drop-li, .drop-li2 {
+.drop-li,
+.drop-li2 {
     width: 100%;
     font-size: 32px;
     font-weight: 600;
@@ -227,7 +229,43 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: #d4d4d4;
 }
 
-.drop-li:hover, .drop-li2:hover {
+.drop-li:hover,
+.drop-li2:hover {
     background-color: #d4d4d4;
     color: black;
+}
+
+
+@media screen and (max-width: 730px) {
+    .Modal {
+        height: 500px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .form-drops {
+        height: 70px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .drop-down h1 {
+        width: 130px;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        border-radius: 12px;
+        padding: 6px;
+        justify-content: center;
+        align-items: center;
+        will-change: contents;
+        transition: all .1s ease-in-out;
+    }
 }
