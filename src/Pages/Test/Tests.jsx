@@ -187,10 +187,9 @@ function Tests() {
         setTotalLenght(questions && questions.length);
         if (isFinished) {
             setCountdown(3);
-            timer = setInterval(() => {
-                setCountdown(prev => {
-                    if (prev === 1) {
-                        clearInterval(timer);
+            setCountdown(prev => {
+                if (prev === 1) {
+                    if (totalLenght) {
                         navigate('/result', {
                             state: {
                                 correctAnswers,
@@ -201,11 +200,10 @@ function Tests() {
                             }
                         });
                     }
-                    return prev - 1;
-                });
-            }, 1000);
+                }
+                return prev - 1;
+            });
         }
-        return () => clearInterval(timer);
     }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
 
 
