@@ -188,17 +188,15 @@ function Tests() {
         if (isFinished) {
             setCountdown(3);
             setCountdown(prev => {
-                if (prev === 1) {
-                    navigate('/result', {
-                        state: {
-                            correctAnswers,
-                            levelStats,
-                            totalScore,
-                            totalLenght,
-                            userId: localStorage.getItem("userId")
-                        }
-                    });
-                }
+                navigate('/result', {
+                    state: {
+                        correctAnswers,
+                        levelStats,
+                        totalScore,
+                        totalLenght,
+                        userId: localStorage.getItem("userId")
+                    }
+                });
                 return prev - 1;
             });
         }
