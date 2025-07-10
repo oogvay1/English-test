@@ -36,17 +36,22 @@ function Tests() {
     ];
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch('https://english-test-13.onrender.com/questions');
-                const json = await res.json();
-                console.log("Fetched questions:", json);
-                setAllLevels(json);
-            } catch (err) {
-                console.error("Xatolik:", err);
-            }
-        };
-        fetchData();
+        const cached = localStorage.getItem("cachedQuestions");
+        if (cached) {
+            setAllLevels(JSON.parse(cached));
+        } else {
+            const fetchData = async () => {
+                try {
+                    const res = await fetch('https://english-test-13.onrender.com/questions');
+                    const json = await res.json();
+                    setAllLevels(json);
+                    localStorage.setItem("cachedQuestions", JSON.stringify(json));
+                } catch (err) {
+                    console.error("Xatolik:", err);
+                }
+            };
+            fetchData();
+        }
     }, []);
 
     const handleNext = () => {
@@ -96,12 +101,10 @@ function Tests() {
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
-
         const fetchData = async () => {
             try {
                 const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
                 const json = await res.json();
-                console.log(json.category)
                 setUserLevel(json.category);
             } catch (err) {
                 console.error("Error fetching user:", err);
@@ -109,12 +112,10 @@ function Tests() {
         };
 
         if (userId) fetchData();
-        console.log(userLevel && userLevel)
     }, []);
 
     useEffect(() => {
         const selected = userLevel;
-
         if (selected) {
             handleLevelSelect(selected);
         }
@@ -125,7 +126,6 @@ function Tests() {
     };
 
     const handleLevelSelect = (combo) => {
-
         let beginner = [];
         let elementary = [];
         let preIntermediate = [];
@@ -175,6 +175,7 @@ function Tests() {
             default:
                 setQuestions([]);
         }
+
         setCurrentIndex(0);
         setSkippedQuestions([]);
         setCorrectAnswers([]);
@@ -182,9 +183,9 @@ function Tests() {
         setShowEndButton(false);
         setSelectedOption(null);
     };
+
     useEffect(() => {
         setTotalLenght(questions && questions.length);
-        console.log(totalLenght && totalLenght)
         if (isFinished) {
             setCountdown(3);
             setCountdown(prev => {
@@ -201,7 +202,6 @@ function Tests() {
             });
         }
     }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
-
 
     const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];
 
