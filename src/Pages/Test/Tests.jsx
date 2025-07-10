@@ -18,6 +18,7 @@ function Tests() {
     const [allLevels, setAllLevels] = useState({});
     const [Levelselected, setLevelSelected] = useState();
     const [userLevel, setUserLevel] = useState('');
+    const [totalLenght, setTotalLenght] = useState(null);
     const [levelStats, setLevelStats] = useState({
         Beginner: 0,
         Elementary: 0,
@@ -92,30 +93,6 @@ function Tests() {
             }
         }
     };
-
-    useEffect(() => {
-        let timer;
-        if (isFinished) {
-            setCountdown(3);
-            timer = setInterval(() => {
-                setCountdown(prev => {
-                    if (prev === 1) {
-                        clearInterval(timer);
-                        navigate('/result', {
-                            state: {
-                                correctAnswers,
-                                levelStats,
-                                totalScore,
-                                userId: localStorage.getItem("userId")
-                            }
-                        });
-                    }
-                    return prev - 1;
-                });
-            }, 1000);
-        }
-        return () => clearInterval(timer);
-    }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
@@ -206,6 +183,32 @@ function Tests() {
         setShowEndButton(false);
         setSelectedOption(null);
     };
+    
+    useEffect(() => {
+        let timer;
+        setTotalLenght(questions.length);
+        if (isFinished) {
+            setCountdown(3);
+            timer = setInterval(() => {
+                setCountdown(prev => {
+                    if (prev === 1) {
+                        clearInterval(timer);
+                        navigate('/result', {
+                            state: {
+                                correctAnswers,
+                                levelStats,
+                                totalScore,
+                                totalLenght,
+                                userId: localStorage.getItem("userId")
+                            }
+                        });
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+        }
+        return () => clearInterval(timer);
+    }, [isFinished, correctAnswers, levelStats, totalScore, navigate]);
 
 
     const quest = isReviewingSkipped ? skippedQuestions[currentIndex] : questions[currentIndex];

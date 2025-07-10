@@ -7,7 +7,7 @@ import transition from '../../Transition';
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correctAnswers = [], totalScore = 0, userId } = location.state || {};
+  const { correctAnswers = [], totalScore = 0, userId, totalLength } = location.state || {};
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
@@ -58,6 +58,7 @@ function TestResult() {
       score: Math.floor(totalScore),
       correctAnswers: correctAnswers.length,
       level,
+      totalLength,
       category: userData.category,
       branch: userData.branch
     })
@@ -100,7 +101,6 @@ function TestResult() {
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
               {newResult.category == 'All' && <h2 className='answers-text'>Your Level: {level}</h2>}
-              <h2 className='answers-text'>Category: {userData?.category}</h2>
             </div>
             <div className="buttons">
               <button
