@@ -38,7 +38,7 @@ function Tests() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('https://english-test-11.onrender.com/questions');
+                const res = await fetch('https://english-test-13.onrender.com/questions');
                 const json = await res.json();
                 console.log("Fetched questions:", json);
                 setAllLevels(json);
@@ -99,7 +99,7 @@ function Tests() {
 
         const fetchData = async () => {
             try {
-                const res = await fetch(`https://english-test-11.onrender.com/Users/${userId}`);
+                const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
                 const json = await res.json();
                 console.log(json.category)
                 setUserLevel(json.category);
@@ -183,24 +183,21 @@ function Tests() {
         setSelectedOption(null);
     };
     useEffect(() => {
-        let timer;
         setTotalLenght(questions && questions.length);
         console.log(totalLenght && totalLenght)
         if (isFinished) {
             setCountdown(3);
             setCountdown(prev => {
                 if (prev === 1) {
-                    if (totalLenght > 0) {
-                        navigate('/result', {
-                            state: {
-                                correctAnswers,
-                                levelStats,
-                                totalScore,
-                                totalLenght,
-                                userId: localStorage.getItem("userId")
-                            }
-                        });
-                    }
+                    navigate('/result', {
+                        state: {
+                            correctAnswers,
+                            levelStats,
+                            totalScore,
+                            totalLenght,
+                            userId: localStorage.getItem("userId")
+                        }
+                    });
                 }
                 return prev - 1;
             });
