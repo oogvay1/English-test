@@ -49,6 +49,7 @@ function TestResult() {
   }, [location, userId]);
 
   useEffect(() => {
+    console.log(totalLength)
     userData && setNewResult({
       name: userData.name,
       lastname: userData.lastname,

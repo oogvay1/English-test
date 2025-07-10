@@ -182,7 +182,6 @@ function Tests() {
         setShowEndButton(false);
         setSelectedOption(null);
     };
-    
     useEffect(() => {
         let timer;
         setTotalLenght(questions && questions.length);
