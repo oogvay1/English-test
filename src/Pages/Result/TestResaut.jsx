@@ -12,7 +12,6 @@ function TestResult() {
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
 
-  // 🧠 Determine user level based on correct answers
   const determineLevel = (correctCount) => {
     if (correctCount >= 1 && correctCount <= 9) {
       setLevel('Beginner');
@@ -48,7 +47,7 @@ function TestResult() {
   }, [location, userId]);
 
   const AddData = async () => {
-    if (!userData) return;
+    if (!userData) return;  
 
     const newResult = {
       name: userData.name,
@@ -82,7 +81,7 @@ function TestResult() {
       setIsSaved(true);
       navigate('/');
     } catch (err) {
-      console.error("❌ Error submitting result:", err);
+      console.error("Error submitting result:", err);
     }
   };
 

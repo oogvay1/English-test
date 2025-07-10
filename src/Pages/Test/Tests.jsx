@@ -57,7 +57,7 @@ function Tests() {
         if (selected && selected.length > 0) {
             handleLevelSelect(selected);
         }
-    } ,[allLevels]);
+    }, [allLevels]);
 
     const handleLevelSelect = (combo) => {
         setLevelSelected(combo);
@@ -186,7 +186,8 @@ function Tests() {
                                 correctAnswers,
                                 levelStats,
                                 totalScore,
-                                userId: localStorage.getItem("userId")
+                                userId: localStorage.getItem("userId"),
+                                selectedLevel: Levelselected
                             }
                         });
                     }
