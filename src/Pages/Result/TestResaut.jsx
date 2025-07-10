@@ -7,11 +7,13 @@ import transition from '../../Transition';
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correctAnswers = [], totalScore = 0, userId } = location.state || {};
+  const { correctAnswers = [], totalScore = 0, userId, totalLength } = location.state || {};
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
+  const [newResult, setNewResult] = useState({});
 
+  // 🧠 Determine user level based on correct answers
   const determineLevel = (correctCount) => {
     if (correctCount >= 1 && correctCount <= 9) {
       setLevel('Beginner');
@@ -35,7 +37,7 @@ function TestResult() {
 
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://english-test-11.onrender.com/Users/${userId}`);
+        const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
         const json = await res.json();
         setUserData(json);
       } catch (err) {
@@ -46,10 +48,9 @@ function TestResult() {
     if (userId) fetchData();
   }, [location, userId]);
 
-  const AddData = async () => {
-    if (!userData) return;  
-
-    const newResult = {
+  useEffect(() => {
+    console.log(totalLength)
+    userData && setNewResult({
       name: userData.name,
       lastname: userData.lastname,
       age: userData.age,
@@ -58,13 +59,17 @@ function TestResult() {
       score: Math.floor(totalScore),
       correctAnswers: correctAnswers.length,
       level,
+      totalLength,
       category: userData.category,
       branch: userData.branch
-    };
-    console.log(newResult)
+    })
+  }, [userData]);
+
+
+  const AddData = async () => {
 
     try {
-      const response = await fetch('https://english-test-11.onrender.com/Result', {
+      const response = await fetch('https://english-test-13.onrender.com/Result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
@@ -72,7 +77,7 @@ function TestResult() {
 
       if (!response.ok) throw new Error('Failed to save result');
 
-      await fetch('https://english-test-11.onrender.com/send-result', {
+      await fetch('https://english-test-13.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
@@ -96,8 +101,7 @@ function TestResult() {
               )}
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
-              <h2 className='answers-text'>Your Level: {level}</h2>
-              <h2 className='answers-text'>Category: {userData?.category}</h2>
+              {newResult.category == 'All' && <h2 className='answers-text'>Your Level: {level}</h2>}
             </div>
             <div className="buttons">
               <button
