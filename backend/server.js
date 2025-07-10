@@ -5,7 +5,6 @@ const jsonServer = require("json-server");
 const axios = require("axios");
 const cors = require("cors");
 const express = require("express");
-const { useEffect } = require("react");
 
 const server = express();
 const router = jsonServer.router("db.json");

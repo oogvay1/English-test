@@ -175,7 +175,6 @@ function Tests() {
             default:
                 setQuestions([]);
         }
-
         setCurrentIndex(0);
         setSkippedQuestions([]);
         setCorrectAnswers([]);
@@ -186,7 +185,7 @@ function Tests() {
     
     useEffect(() => {
         let timer;
-        setTotalLenght(questions.length);
+        setTotalLenght(questions && questions.length);
         if (isFinished) {
             setCountdown(3);
             timer = setInterval(() => {
