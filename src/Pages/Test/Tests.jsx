@@ -185,6 +185,7 @@ function Tests() {
     useEffect(() => {
         let timer;
         setTotalLenght(questions && questions.length);
+        console.log(totalLenght && totalLenght)
         if (isFinished) {
             setCountdown(3);
             setCountdown(prev => {
