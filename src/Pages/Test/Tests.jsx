@@ -213,7 +213,6 @@ function Tests() {
                         correctAnswers,
                         levelStats,
                         totalScore,
-                        max,
                         userId: localStorage.getItem("userId")
                     }
                 });
