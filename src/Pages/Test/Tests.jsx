@@ -202,7 +202,7 @@ function Tests() {
     };
 
     let max = maxScore.toFixed(1);
-console.log(max);
+    
     useEffect(() => {
         setTotalLenght(questions && questions.length);
         if (isFinished) {
