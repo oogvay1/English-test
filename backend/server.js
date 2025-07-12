@@ -5,8 +5,8 @@ const jsonServer = require("json-server");
 const axios = require("axios");
 const cors = require("cors");
 const express = require("express");
-const { useState, useEffect } = require("react");
-const [max, setMax] = useState(0);
+const { } = require("react");
+import { useState, useEffect } from "react";
 
 const server = express();
 const router = jsonServer.router("db.json");
@@ -19,6 +19,7 @@ server.use(middlewares);
 server.post("/send-result", async (req, res) => {
     const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch } = req.body;
 
+    const [max, setMax] = useState(0);
 
     useEffect(() => {
         if (category == "Beginner") {
@@ -26,7 +27,7 @@ server.post("/send-result", async (req, res) => {
         } else if (category == "Beg - Ele") {
             setMax(32);
         }
-    }, [category]);
+    }, [])
 
     const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}`;
 
