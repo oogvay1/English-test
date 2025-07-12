@@ -16,9 +16,9 @@ function Tests() {
     const [totalScore, setTotalScore] = useState(0);
     const [countdown, setCountdown] = useState();
     const [allLevels, setAllLevels] = useState({});
-    const [Levelselected, setLevelSelected] = useState();
     const [userLevel, setUserLevel] = useState('');
     const [totalLenght, setTotalLenght] = useState(0);
+    const [maxScore, setMaxScore] = useState(0);
     const [levelStats, setLevelStats] = useState({
         Beginner: 0,
         Elementary: 0,
@@ -34,6 +34,18 @@ function Tests() {
         { level: "Pre-intermediate", score: 2.0 },
         { level: "Intermediate", score: 2.5 }
     ];
+
+    // Calculate max score utility function
+    const calculateMaxScore = (questions) => {
+        let total = 0;
+        questions.forEach(q => {
+            const levelObj = levels.find(l => l.level === q.level);
+            if (levelObj) {
+                total += levelObj.score;
+            }
+        });
+        return total;
+    };
 
     useEffect(() => {
         const cached = localStorage.getItem("cachedQuestions");
@@ -133,48 +145,53 @@ function Tests() {
 
         const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
+        let combinedQuestions = [];
+
         switch (combo) {
             case "Beginner":
                 beginner = allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || [];
-                setQuestions(shuffle(beginner));
+                combinedQuestions = shuffle(beginner);
                 break;
             case "Elementary":
                 elementary = allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || [];
-                setQuestions(shuffle(elementary));
+                combinedQuestions = shuffle(elementary);
                 break;
             case "Pre-Intermediate":
                 preIntermediate = allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || [];
-                setQuestions(shuffle(preIntermediate));
+                combinedQuestions = shuffle(preIntermediate);
                 break;
             case "Intermediate":
                 intermediate = allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || [];
-                setQuestions(shuffle(intermediate));
+                combinedQuestions = shuffle(intermediate);
                 break;
             case "Beg - Ele":
                 beginner = shuffle(allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || []);
                 elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
-                setQuestions([...beginner, ...elementary]);
+                combinedQuestions = [...beginner, ...elementary];
                 break;
             case "Ele - Pre-Inter":
                 elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
                 preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
-                setQuestions([...elementary, ...preIntermediate]);
+                combinedQuestions = [...elementary, ...preIntermediate];
                 break;
             case "Pre-Inter - Inter":
                 preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
                 intermediate = shuffle(allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || []);
-                setQuestions([...preIntermediate, ...intermediate]);
+                combinedQuestions = [...preIntermediate, ...intermediate];
                 break;
             case "All":
                 beginner = shuffle(allLevels.Beginner?.map(q => ({ ...q, level: "Beginner" })) || []);
                 elementary = shuffle(allLevels.Elementary?.map(q => ({ ...q, level: "Elementary" })) || []);
                 preIntermediate = shuffle(allLevels["Pre-Intermediate"]?.map(q => ({ ...q, level: "Pre-intermediate" })) || []);
                 intermediate = shuffle(allLevels.Intermediate?.map(q => ({ ...q, level: "Intermediate" })) || []);
-                setQuestions([...beginner, ...elementary, ...preIntermediate, ...intermediate]);
+                combinedQuestions = [...beginner, ...elementary, ...preIntermediate, ...intermediate];
                 break;
             default:
-                setQuestions([]);
+                combinedQuestions = [];
         }
+
+        setQuestions(combinedQuestions);
+        setMaxScore(calculateMaxScore(combinedQuestions));
 
         setCurrentIndex(0);
         setSkippedQuestions([]);
@@ -184,6 +201,8 @@ function Tests() {
         setSelectedOption(null);
     };
 
+    let max = maxScore.toFixed(1);
+console.log(max);
     useEffect(() => {
         setTotalLenght(questions && questions.length);
         if (isFinished) {
@@ -194,7 +213,7 @@ function Tests() {
                         correctAnswers,
                         levelStats,
                         totalScore,
-                        totalLenght,
+                        max,
                         userId: localStorage.getItem("userId")
                     }
                 });
