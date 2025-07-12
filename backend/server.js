@@ -5,6 +5,8 @@ const jsonServer = require("json-server");
 const axios = require("axios");
 const cors = require("cors");
 const express = require("express");
+const { useState, useEffect } = require("react");
+const [max, setMax] = useState(0);
 
 const server = express();
 const router = jsonServer.router("db.json");
@@ -17,17 +19,16 @@ server.use(middlewares);
 server.post("/send-result", async (req, res) => {
     const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch } = req.body;
 
-    let max;
 
-    const identify = () => {
+    useEffect(() => {
         if (category == "Beginner") {
-            max = 13
+            setMax(13);
         } else if (category == "Beg - Ele") {
-            max = 32
+            setMax(32);
         }
-    }
+    }, [category]);
 
-    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${identify()}\n📈 Level: ${level}`;
+    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}`;
 
     try {
         await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
