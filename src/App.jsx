@@ -5,12 +5,27 @@ import { AnimatePresence } from "framer-motion"
 import Header from "./Components/Header/Header";
 import Modal from "./Components/Modal/Modal"
 import TestResult from "./Pages/Result/TestResaut"
+import ScrollVelocity from "./Components/Background/Background"
+import './Components/Background/Background.css'
 function App() {
 
   const location = useLocation();
+  console.log(ScrollVelocity)
 
   return (
     <>
+      <ScrollVelocity
+        texts={[<img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
+        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
+        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,
+        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
+        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,
+        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
+        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,
+        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,]}
+        velocity={50}
+        className="custom-scroll-text"
+      />
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
