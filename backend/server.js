@@ -15,9 +15,23 @@ server.use(express.json());
 server.use(middlewares);
 
 server.post("/send-result", async (req, res) => {
-    const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, totalLength, category, branch } = req.body;
+    const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch } = req.body;
 
-    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${totalLength && totalLength}\n📈 Level: ${level}`;
+    let max = 0;
+
+    if (category == "Beginner") {
+        max = 13;
+    } else if (category == "Beg - Ele") {
+        max = 32;
+    } else if (category == "Ele - Pre-Inter") {
+        max = 44;
+    } else if (category == "Pre-Inter - Inter") {
+        max = 100;
+    } else {
+        max = 100;
+    }
+
+    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}`;
 
     try {
         await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
