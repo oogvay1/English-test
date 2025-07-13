@@ -24,7 +24,7 @@ server.post("/send-result", async (req, res) => {
     } else if (category == "Beg - Ele") {
         max = 32;
     } else if (category == "Ele - Pre-Inter") {
-        max = 60;
+        max = 44;
     } else if (category == "Pre-Inter - Inter") {
         max = 100;
     } else {
