@@ -184,8 +184,8 @@ function Modal() {
     return (
         <>
             <div className="main-modal">
-                <div className="Modal">
-                    <div className="container">
+                <div className="container">
+                    <div className="Modal">
                         <form ref={formRef} className="form" onSubmit={saveData}>
 
                             <div className="form-drops">

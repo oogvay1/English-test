@@ -4,10 +4,11 @@
   left: 0;
   top: 10px;
   z-index: -100;
-  filter: brightness(.5);
+  filter: blur(20px);
 }
 
 .backraund-img {
+  filter: brightness(.5);
   width: calc(18vw + 10px);
 }
 
