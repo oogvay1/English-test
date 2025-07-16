@@ -7,6 +7,7 @@ import Modal from "./Components/Modal/Modal"
 import TestResult from "./Pages/Result/TestResaut"
 import ScrollVelocity from "./Components/Background/Background"
 import './Components/Background/Background.css'
+import img from '../src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png'
 function App() {
 
   const location = useLocation();
@@ -15,14 +16,14 @@ function App() {
   return (
     <>
       <ScrollVelocity
-        texts={[<img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
-        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
-        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,
-        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
-        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,
-        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img" />,
-        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,
-        <img className='backraund-img' src="src/assets/imgs/11427f39c15a1b292c23c__2_-removebg-preview.png" alt="Img"/>,]}
+        texts={[<img className='backraund-img' src={img} alt="Img" />,
+        <img className='backraund-img' src={img} alt="Img" />,
+        <img className='backraund-img' src={img} alt="Img"/>,
+        <img className='backraund-img' src={img} alt="Img" />,
+        <img className='backraund-img' src={img} alt="Img"/>,
+        <img className='backraund-img' src={img} alt="Img" />,
+        <img className='backraund-img' src={img} alt="Img"/>,
+        <img className='backraund-img' src={img} alt="Img"/>,]}
         velocity={50}
         className="custom-scroll-text"
       />
