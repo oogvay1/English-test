@@ -15,7 +15,7 @@ server.use(express.json());
 server.use(middlewares);
 
 server.post("/send-result", async (req, res) => {
-    const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch } = req.body;
+    const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch, levelStats } = req.body;
 
     let max = 0;
 
@@ -26,12 +26,16 @@ server.post("/send-result", async (req, res) => {
     } else if (category == "Ele - Pre-Inter") {
         max = 44;
     } else if (category == "Pre-Inter - Inter") {
-        max = 100;
+        max = 68;
     } else {
         max = 100;
     }
 
-    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}`;
+    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}\n
+    Beginner: ${levelStats.Beginner}\n
+    Elementary: ${levelStats.Elementary}\n
+    Pre-intermediate: ${levelStats.Pre-intermediate}\n
+    Intermediate: ${levelStats.Intermediate}`;
 
     try {
         await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {

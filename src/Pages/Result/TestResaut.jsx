@@ -7,7 +7,7 @@ import transition from '../../Transition';
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correctAnswers = [], totalScore = 0, userId, totalLength } = location.state || {};
+  const { correctAnswers = [], totalScore = 0, userId, totalLength, levelStats = {} } = location.state || {};
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
@@ -60,10 +60,10 @@ function TestResult() {
       level,
       totalLength,
       category: userData.category,
-      branch: userData.branch
+      branch: userData.branch,
+      levelStats
     })
   }, [userData]);
-
 
   const AddData = async () => {
 
