@@ -13,7 +13,6 @@ function TestResult() {
   const [level, setLevel] = useState('');
   const [newResult, setNewResult] = useState({});
 
-  // 🧠 Determine user level based on correct answers
   const determineLevel = (correctCount) => {
     if (correctCount >= 1 && correctCount <= 9) {
       setLevel('Beginner');
