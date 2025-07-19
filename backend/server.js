@@ -30,6 +30,7 @@ server.post("/send-result", async (req, res) => {
     } else {
         max = 100;
     }
+    console.log('salom')
 
     const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}\n
     Beginner: ${levelStats.Beginner}\n
