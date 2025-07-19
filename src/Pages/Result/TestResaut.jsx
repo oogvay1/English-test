@@ -33,7 +33,7 @@ function TestResult() {
     } else {
       determineLevel(correctAnswers.length);
     }
-console.log(userId)
+    console.log(userId)
     const fetchData = async () => {
       try {
         const res = await fetch(`https://english-test-1ujp.onrender.com/Users/${userId}`);
@@ -64,7 +64,7 @@ console.log(userId)
     })
   }, [userData]);
 
-  const AddData = async () => {
+  async function AddData(callback) {
 
     try {
       const response = await fetch('https://english-test-1ujp.onrender.com/Result', {
@@ -74,19 +74,28 @@ console.log(userId)
       });
 
       if (!response.ok) throw new Error('Failed to save result');
+    } catch (err) {
+      console.error("Error submitting result:", err);
+    }
+    callback();
+  };
 
+  async function Send() {
+    try {
       await fetch('https://english-test-1ujp.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
-
+      
       setIsSaved(true);
       navigate('/');
     } catch (err) {
       console.error("Error submitting result:", err);
     }
-  };
+  }
+
+  AddData(Send);
 
   return (
     <section>

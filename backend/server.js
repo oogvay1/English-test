@@ -16,15 +16,10 @@ server.use(cors({
 server.use(express.json());
 server.use(middlewares);
 
-////////////////////////////////////////////////////////
-// ✅ Health check route to confirm server is running
 server.get("/", (req, res) => {
     res.send("✅ Server is running and healthy.");
 });
-////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////
-// ✅ /send-result endpoint
 server.post("/send-result", async (req, res) => {
     const {
         name, lastname, age, birthdate, phoneNumber,
@@ -74,7 +69,6 @@ Intermediate: ${levelStats?.Intermediate}
         res.status(500).send({ success: false, error: error.message });
     }
 });
-////////////////////////////////////////////////////////
 
 server.use(router);
 
