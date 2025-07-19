@@ -51,7 +51,7 @@ server.post("/send-result", async (req, res) => {
 📈 Level: ${level}
 Beginner: ${levelStats?.Beginner}
 Elementary: ${levelStats?.Elementary}
-Pre-intermediate: ${levelStats?.Pre - intermediate}
+Pre-intermediate: ${levelStats?.["Pre-Intermediate"]}
 Intermediate: ${levelStats?.Intermediate}
   `;
 

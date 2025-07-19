@@ -13,7 +13,6 @@ function TestResult() {
   const [level, setLevel] = useState('');
   const [newResult, setNewResult] = useState({});
 
-  // 🧠 Determine user level based on correct answers
   const determineLevel = (correctCount) => {
     if (correctCount >= 1 && correctCount <= 9) {
       setLevel('Beginner');
@@ -37,7 +36,7 @@ function TestResult() {
 
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://english-test-m4qn.onrender.com/Users/${userId}`);
+        const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
         const json = await res.json();
         setUserData(json);
       } catch (err) {
@@ -67,27 +66,20 @@ function TestResult() {
 
   const AddData = async () => {
     try {
-      const response = await fetch('https://english-test-m4qn.onrender.com/Result', {
+      const response = await fetch('https://english-test-13.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
 
       if (!response.ok) {
-        const errorText = await response.text(); // Read server response
-        throw new Error(`Failed to save result: ${response.status} - ${errorText}`);
+        const errMsg = await response.text();
+        throw new Error(`Fetch failed: ${response.status} - ${errMsg}`);
       }
 
-      await fetch('https://english-test-m4qn.onrender.com/send-result', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newResult)
-      });
-
-      setIsSaved(true);
-      navigate('/');
+      console.log("✅ Result sent successfully!");
     } catch (err) {
-      console.error("Error submitting result:", err);
+      console.error("❌ Frontend fetch error:", err);
     }
   };
 
