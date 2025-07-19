@@ -37,7 +37,7 @@ function TestResult() {
 
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
+        const res = await fetch(`https://english-test-m4qn.onrender.com/Users/${userId}`);
         const json = await res.json();
         setUserData(json);
       } catch (err) {
@@ -66,17 +66,19 @@ function TestResult() {
 
 
   const AddData = async () => {
-
     try {
-      const response = await fetch('https://english-test-13.onrender.com/Result', {
+      const response = await fetch('https://english-test-m4qn.onrender.com/Result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
 
-      if (!response.ok) throw new Error('Failed to save result');
+      if (!response.ok) {
+        const errorText = await response.text(); // Read server response
+        throw new Error(`Failed to save result: ${response.status} - ${errorText}`);
+      }
 
-      await fetch('https://english-test-13.onrender.com/send-result', {
+      await fetch('https://english-test-m4qn.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
@@ -88,6 +90,7 @@ function TestResult() {
       console.error("Error submitting result:", err);
     }
   };
+
 
   return (
     <section>

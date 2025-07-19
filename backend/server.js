@@ -46,8 +46,10 @@ server.post("/send-result", async (req, res) => {
         res.status(500).send({ success: false });
     }
 });
-
-server.use(router);
+server.use((req, res, next) => {
+    console.log(`[${req.method}] ${req.url}`);
+    next();
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
