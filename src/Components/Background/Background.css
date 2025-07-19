@@ -4,7 +4,7 @@
   left: 0;
   top: 10px;
   z-index: -100;
-  filter: blur(20px);
+  filter: blur(10px);
 }
 
 .backraund-img {
@@ -40,5 +40,16 @@
   .scroller {
     font-size: 5rem;
     line-height: 5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .backgraund-image {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    z-index: -100;
+    filter: blur(3px);
   }
 }

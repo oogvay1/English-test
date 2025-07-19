@@ -8,15 +8,6 @@ body {
     overflow-y: hidden;
 }
 
-.video {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -100;
-    filter: brightness(.5);
-}
-
 .result-name {
     font-size: 50px;
     margin-bottom: 2rem;
@@ -50,7 +41,7 @@ body {
     align-items: center;
 }
 
-.results{
+.results {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,10 +49,20 @@ body {
     gap: px;
 }
 
-.save-btn{
+.save-btn {
     width: 230px;
     height: 40px;
     font-size: 20px;
     color: black;
     background-color: #fff;
+}
+
+@media screen and (max-width: 400px) {
+    .result-box {
+        height: 510px;
+    }
+
+    .result-card {
+        border-radius: 20px;
+    }
 }

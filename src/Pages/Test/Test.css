@@ -223,7 +223,21 @@ body {
     .level {
         font-size: 26px;
     }
-    .queestion{
+
+    .queestion {
         font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .quiz-card,
+    .quiz-end {
+        border-radius: 20px;
+    }
+
+
+    .quiz-box {
+        height: 500px;
     }
 }
