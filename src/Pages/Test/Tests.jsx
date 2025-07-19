@@ -201,8 +201,8 @@ function Tests() {
         setSelectedOption(null);
     };
 
-    let max = maxScore.toFixed(1);
-    console.log(max)
+    let max = Math.round(maxScore.toFixed(1));
+    
     useEffect(() => {
         setTotalLenght(questions && questions.length);
         if (isFinished) {
