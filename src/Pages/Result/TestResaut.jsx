@@ -13,7 +13,6 @@ function TestResult() {
   const [level, setLevel] = useState('');
   const [newResult, setNewResult] = useState({});
 
-  // 🧠 Determine user level based on correct answers
   const determineLevel = (correctCount) => {
     if (correctCount >= 1 && correctCount <= 9) {
       setLevel('Beginner');
@@ -34,10 +33,10 @@ function TestResult() {
     } else {
       determineLevel(correctAnswers.length);
     }
-
+console.log(userId)
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
+        const res = await fetch(`https://english-test-1ujp.onrender.com/Users/${userId}`);
         const json = await res.json();
         setUserData(json);
       } catch (err) {
@@ -68,19 +67,19 @@ function TestResult() {
   const AddData = async () => {
 
     try {
-      const response = await fetch('https://english-test-13.onrender.com/Result', {
+      const response = await fetch('https://english-test-1ujp.onrender.com/Result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
 
-      if (!response.ok) throw new Error('Failed to save result');
-
-      await fetch('https://english-test-13.onrender.com/send-result', {
+      const ress = await fetch('https://english-test-1ujp.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
+
+      if (!response.ok && !ress.ok) throw new Error('Failed to save result');
 
       setIsSaved(true);
       navigate('/');
