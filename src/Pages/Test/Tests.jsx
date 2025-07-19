@@ -225,7 +225,7 @@ function Tests() {
 
     if (!quest && !showEndButton) {
         return (
-            <div style={{ padding: "40px", textAlign: "center" }}>
+            <div style={{ padding: "40px", textAlign: "center", color: "#fff" }}>
                 <h1>Loading...</h1>
                 <p>Make sure the server and selected level are working.</p>
             </div>

@@ -270,3 +270,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         transition: all .1s ease-in-out;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .main-modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        width: 100vw;
+        height: 81vh;
+        overflow: hidden;
+        z-index: 10;
+        padding: 0 20px;
+    }
+
+    .Modal {
+        width: 330px;
+        height: 500px;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        background-color: #d4d4d445;
+        backdrop-filter: blur(6px);
+    }
+
+}
