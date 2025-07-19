@@ -47,10 +47,12 @@ server.post("/send-result", async (req, res) => {
 📍 Branch: ${branch}
 📊 Score: ${score}/${max}
 📈 Level: ${level}
-Beginner: ${levelStats?.Beginner}
-Elementary: ${levelStats?.Elementary}
-Pre-intermediate: ${levelStats?.["Pre-intermediate"]}
-Intermediate: ${levelStats?.Intermediate}
+
+Degree Answers:
+    Beginner: ${levelStats?.Beginner}
+    Elementary: ${levelStats?.Elementary}
+    Pre-intermediate: ${levelStats?.["Pre-intermediate"]}
+    Intermediate: ${levelStats?.Intermediate}
 `;
 
     try {
