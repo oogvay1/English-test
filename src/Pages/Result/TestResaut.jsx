@@ -73,13 +73,13 @@ console.log(userId)
         body: JSON.stringify(newResult)
       });
 
-      const ress = await fetch('https://english-test-1ujp.onrender.com/send-result', {
+      if (!response.ok) throw new Error('Failed to save result');
+
+      await fetch('https://english-test-1ujp.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
-
-      if (!response.ok && !ress.ok) throw new Error('Failed to save result');
 
       setIsSaved(true);
       navigate('/');
