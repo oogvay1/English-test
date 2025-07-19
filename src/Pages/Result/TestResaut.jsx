@@ -64,9 +64,9 @@ function TestResult() {
     })
   }, [userData]);
 
-  async function AddData(callback) {
-
+  const handleSaveAndSend = async () => {
     try {
+      // ✅ First, save to /Result
       const response = await fetch('https://english-test-1ujp.onrender.com/Result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -74,28 +74,20 @@ function TestResult() {
       });
 
       if (!response.ok) throw new Error('Failed to save result');
-    } catch (err) {
-      console.error("Error submitting result:", err);
-    }
-    callback();
-  };
 
-  async function Send() {
-    try {
+      // ✅ Then, send to Telegram via /send-result
       await fetch('https://english-test-1ujp.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
-      
+
       setIsSaved(true);
       navigate('/');
     } catch (err) {
       console.error("Error submitting result:", err);
     }
-  }
-
-  AddData(Send);
+  };
 
   return (
     <section>
