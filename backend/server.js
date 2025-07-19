@@ -32,11 +32,7 @@ server.post("/send-result", async (req, res) => {
     }
     console.log('salom')
 
-    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}\n
-    Beginner: ${levelStats.Beginner}\n
-    Elementary: ${levelStats.Elementary}\n
-    Pre-intermediate: ${levelStats.Pre-intermediate}\n
-    Intermediate: ${levelStats.Intermediate}`;
+    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}\nBeginner: ${levelStats.Beginner}\nElementary: ${levelStats.Elementary}\nPre-intermediate: ${levelStats.Pre-intermediate}\nIntermediate: ${levelStats.Intermediate}`;
 
     try {
         await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
