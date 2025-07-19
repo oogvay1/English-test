@@ -33,7 +33,7 @@ function TestResult() {
     } else {
       determineLevel(correctAnswers.length);
     }
-    console.log(userId)
+
     const fetchData = async () => {
       try {
         const res = await fetch(`https://english-test-1ujp.onrender.com/Users/${userId}`);
@@ -45,24 +45,26 @@ function TestResult() {
     };
 
     if (userId) fetchData();
-  }, [location, userId]);
+  }, [location, userId, navigate, correctAnswers.length]);
 
   useEffect(() => {
-    userData && setNewResult({
-      name: userData.name,
-      lastname: userData.lastname,
-      age: userData.age,
-      birthdate: userData.birthdate,
-      phoneNumber: userData.phone,
-      score: Math.floor(totalScore),
-      correctAnswers: correctAnswers.length,
-      level,
-      totalLength,
-      category: userData.category,
-      branch: userData.branch,
-      levelStats
-    })
-  }, [userData]);
+    if (userData) {
+      setNewResult({
+        name: userData.name,
+        lastname: userData.lastname,
+        age: userData.age,
+        birthdate: userData.birthdate,
+        phoneNumber: userData.phone,
+        score: Math.floor(totalScore),
+        correctAnswers: correctAnswers.length,
+        level,
+        totalLength,
+        category: userData.category,
+        branch: userData.branch,
+        levelStats
+      });
+    }
+  }, [userData, totalScore, correctAnswers.length, level, totalLength]);
 
   const handleSaveAndSend = async () => {
     try {
@@ -100,13 +102,13 @@ function TestResult() {
               )}
               <h2 className='answers-text'>Correct answers: {correctAnswers.length}</h2>
               <h2 className='answers-text'>Total Score: {Math.floor(totalScore)}</h2>
-              {newResult.category == 'All' && <h2 className='answers-text'>Your Level: {level}</h2>}
+              {newResult.category === 'All' && <h2 className='answers-text'>Your Level: {level}</h2>}
             </div>
             <div className="buttons">
               <button
                 style={{ color: "black" }}
                 className='save-btn'
-                onClick={AddData}
+                onClick={handleSaveAndSend}
                 disabled={isSaved}
               >
                 {isSaved ? "Saved!" : "Save and go to study"}
