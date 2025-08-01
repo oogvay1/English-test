@@ -47,6 +47,7 @@ server.post("/send-result", async (req, res) => {
 📍 Branch: ${branch}
 📊 Score: ${score}/${max}
 📈 Level: ${level}
+📅 Date: ${new Date().toLocaleString()}
 
 Degree Answers:
     Beginner: ${levelStats?.Beginner}
