@@ -7,7 +7,7 @@ import transition from '../../Transition';
 function TestResult() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { correctAnswers = [], totalScore = 0, userId, totalLength } = location.state || {};
+  const { correctAnswers = [], levelStats = {}, totalScore = 0, userId, totalLength, } = location.state || {};
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
@@ -36,7 +36,7 @@ function TestResult() {
 
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
+        const res = await fetch(`https://english-test-l6zz.onrender.com/Users/${userId}`);
         const json = await res.json();
         setUserData(json);
       } catch (err) {
@@ -59,34 +59,34 @@ function TestResult() {
       level,
       totalLength,
       category: userData.category,
-      branch: userData.branch
+      branch: userData.branch,
+      levelStats
     })
   }, [userData]);
-
+  console.log(levelStats?.["Pre-intermediate"]);
 
   const AddData = async () => {
-
     try {
-      const response = await fetch('https://english-test-13.onrender.com/Result', {
+      const response = await fetch('https://english-test-l6zz.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newResult)
       });
 
-      if (!response.ok) throw new Error('Failed to save result');
+      if (!response.ok) {
+        const errMsg = await response.text();
+        throw new Error(`Fetch failed: ${response.status} - ${errMsg}`);
+      } else {
+        navigate('/');
+        setIsSaved(true);
+      }
 
-      await fetch('https://english-test-13.onrender.com/send-result', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newResult)
-      });
-
-      setIsSaved(true);
-      navigate('/');
+      console.log("✅ Result sent successfully!");
     } catch (err) {
-      console.error("Error submitting result:", err);
+      console.error("❌ Frontend fetch error:", err);
     }
   };
+
 
   return (
     <section>

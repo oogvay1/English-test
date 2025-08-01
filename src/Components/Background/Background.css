@@ -9,7 +9,7 @@
 
 .backraund-img {
   filter: brightness(.5);
-  width: calc(18vw + 10px);
+  width: 20px;
 }
 
 .parallax {
@@ -33,7 +33,7 @@
 }
 
 .backraund-img {
-  width: calc(20vw + 10px);
+  width: calc(15vw + 100px);
 }
 
 @media (min-width: 768px) {

@@ -54,7 +54,7 @@ function Tests() {
         } else {
             const fetchData = async () => {
                 try {
-                    const res = await fetch('https://english-test-13.onrender.com/questions');
+                    const res = await fetch('https://english-test-l6zz.onrender.com/questions');
                     const json = await res.json();
                     setAllLevels(json);
                     localStorage.setItem("cachedQuestions", JSON.stringify(json));
@@ -115,7 +115,7 @@ function Tests() {
         const userId = localStorage.getItem('userId');
         const fetchData = async () => {
             try {
-                const res = await fetch(`https://english-test-13.onrender.com/Users/${userId}`);
+                const res = await fetch(`https://english-test-l6zz.onrender.com/Users/${userId}`);
                 const json = await res.json();
                 setUserLevel(json.category);
             } catch (err) {
@@ -201,8 +201,8 @@ function Tests() {
         setSelectedOption(null);
     };
 
-    let max = maxScore.toFixed(1);
-    console.log(max)
+    let max = Math.round(maxScore.toFixed(1));
+    
     useEffect(() => {
         setTotalLenght(questions && questions.length);
         if (isFinished) {

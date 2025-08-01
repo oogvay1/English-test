@@ -7,7 +7,7 @@ import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 import ScrollVelocity from '../Background/Background';
 
 function Modal() {
-    const [url, setUrl] = useState('https://english-test-13.onrender.com/Users');
+    const [url, setUrl] = useState('https://english-test-l6zz.onrender.com/Users');
     const [saved, setSaved] = useState(false);
     const data = useFetch(url);
     const inputRef = useRef([]);

@@ -1,10 +1,10 @@
-const BOT_TOKEN = "7774220625:AAHS8YcVttpEcewgsuvzzJWhqlNvM_S1g4w";
-const CHAT_ID = "-1002833288678";
-
+const express = require("express");
 const jsonServer = require("json-server");
 const axios = require("axios");
 const cors = require("cors");
-const express = require("express");
+
+const BOT_TOKEN = "7774220625:AAHS8YcVttpEcewgsuvzzJWhqlNvM_S1g4w";
+const CHAT_ID = "-1002833288678";
 
 const server = express();
 const router = jsonServer.router("db.json");
@@ -14,24 +14,46 @@ server.use(cors());
 server.use(express.json());
 server.use(middlewares);
 
+// Health check
+server.get("/", (req, res) => {
+    res.send("✅ Server is running and healthy.");
+});
+
+// Telegram POST endpoint
 server.post("/send-result", async (req, res) => {
-    const { name, lastname, age, birthdate, phoneNumber, score, correctAnswers, level, category, branch } = req.body;
+    const {
+        name, lastname, age, birthdate, phoneNumber,
+        score, correctAnswers, level, category, branch, levelStats
+    } = req.body;
 
     let max = 0;
-
-    if (category == "Beginner") {
-        max = 13;
-    } else if (category == "Beg - Ele") {
-        max = 32;
-    } else if (category == "Ele - Pre-Inter") {
-        max = 44;
-    } else if (category == "Pre-Inter - Inter") {
-        max = 100;
-    } else {
-        max = 100;
+    switch (category) {
+        case "Beginner": max = 13; break;
+        case "Beg - Ele": max = 32; break;
+        case "Ele - Pre-Inter": max = 44; break;
+        case "Pre-Inter - Inter": max = 68; break;
+        default: max = 100;
     }
 
-    const message = `🎓 *New Test Result!*\n👤 Name: ${name}\n👥 Lastname: ${lastname}\n🎉 Age: ${age}\n📆 Birthdate: ${birthdate}\n📲 Phone-Number: ${phoneNumber}\n✅ Correct Answers: ${correctAnswers}\n📚 Category: ${category}\n📍 Branch: ${branch}\n📊 Score: ${score}/${max}\n📈 Level: ${level}`;
+    const message = `
+🎓 *New Test Result!*
+👤 Name: ${name}
+👥 Lastname: ${lastname}
+🎉 Age: ${age}
+📆 Birthdate: ${birthdate}
+📲 Phone-Number: ${phoneNumber}
+✅ Correct Answers: ${correctAnswers}
+📚 Category: ${category}
+📍 Branch: ${branch}
+📊 Score: ${score}/${max}
+📈 Level: ${level}
+
+Degree Answers:
+    Beginner: ${levelStats?.Beginner}
+    Elementary: ${levelStats?.Elementary}
+    Pre-intermediate: ${levelStats?.["Pre-intermediate"]}
+    Intermediate: ${levelStats?.Intermediate}
+`;
 
     try {
         await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -42,14 +64,14 @@ server.post("/send-result", async (req, res) => {
 
         res.send({ success: true });
     } catch (error) {
-        console.error("Telegram error:", error.response?.data || error.message);
-        res.status(500).send({ success: false });
+        res.status(500).send({ success: false, error: error.message });
     }
 });
 
+// ✅ THIS IS THE MISSING LINE YOU FORGOT:
 server.use(router);
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`✅ JSON Server running on port ${PORT}`);
+    console.log(`✅ Server running on port ${PORT}`);
 });
