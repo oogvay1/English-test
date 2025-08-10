@@ -11,6 +11,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 *::selection {
     background-color: #2e21e1;
 }
