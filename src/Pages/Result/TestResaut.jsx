@@ -3,6 +3,7 @@ import './TestResult.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 import transition from '../../Transition';
+import Loader from '../../Components/Loader';
 
 function TestResult() {
   const location = useLocation();
@@ -11,6 +12,7 @@ function TestResult() {
   const [userData, setUserData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
   const [level, setLevel] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [newResult, setNewResult] = useState({});
 
   const determineLevel = (correctCount) => {
@@ -67,6 +69,7 @@ function TestResult() {
 
   const AddData = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch('https://english-test-l6zz.onrender.com/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -84,6 +87,8 @@ function TestResult() {
       console.log("✅ Result sent successfully!");
     } catch (err) {
       console.error("❌ Frontend fetch error:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -108,7 +113,7 @@ function TestResult() {
                 onClick={AddData}
                 disabled={isSaved}
               >
-                {isSaved ? "Saved!" : "Save and go to study"}
+                {isLoading ? (<Loader />) : isSaved ? "Saved!" : "Save and go to study"}
               </button>
             </div>
           </div>

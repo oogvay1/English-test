@@ -51,9 +51,13 @@ body {
 
 .save-btn {
     width: 230px;
-    height: 40px;
+    height: 55px;
+    padding: 5px;
     font-size: 20px;
     color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #fff;
 }
 

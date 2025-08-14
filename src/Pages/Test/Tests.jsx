@@ -35,7 +35,6 @@ function Tests() {
         { level: "Intermediate", score: 2.5 }
     ];
 
-    // Calculate max score utility function
     const calculateMaxScore = (questions) => {
         let total = 0;
         questions.forEach(q => {
@@ -241,7 +240,7 @@ function Tests() {
                             {showEndButton ? (
                                 <div className="end-test">
                                     <h2>Test finished!</h2>
-                                    <button className='finish-btn' onClick={() => setIsFinished(true)}>Go to Results</button>
+                                    <button className='finish-btn2' onClick={() => setIsFinished(true)}>Go to Results</button>
                                 </div>
                             ) : (
                                 <>
