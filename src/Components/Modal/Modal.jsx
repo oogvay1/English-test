@@ -5,11 +5,12 @@ import useFetch from '../../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 import video from '../../../public/ace4939aefe5a2c294d49273022c3503.mp4';
 import ScrollVelocity from '../Background/Background';
+import Loader from '../Loader';
 
 function Modal() {
     const [url, setUrl] = useState('https://english-test-l6zz.onrender.com/Users');
     const [saved, setSaved] = useState(false);
-    const data = useFetch(url);
+    const [isLoading, setIsLoading] = useState(false);
     const inputRef = useRef([]);
     const ageRef = useRef(null);
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Modal() {
         branch: '',
         category: '',
     };
-
+    console.log(isLoading)
     const [form, setForm] = useState(initial);
 
     const isValid = inputRef.current.every(
@@ -48,6 +49,8 @@ function Modal() {
         if (isValid) {
 
             try {
+                setIsLoading(true);
+
                 const response = await fetch(url, {
                     method: "POST",
                     headers: {
@@ -68,7 +71,10 @@ function Modal() {
                 });
             } catch (error) {
                 console.error('Error adding user:', error);
+            } finally {
+                setIsLoading(false);
             }
+
         } else {
             inputRef.current.forEach(el => {
                 if (el && el.value.trim() === '') {
@@ -248,7 +254,7 @@ function Modal() {
                                     {errorAge && <p className='valid-p'>Enter valid age</p>}
                                     <i className="ri-calendar-line"></i>
                                 </label>
-                                <button className='submit-btn' onClick={saveData}>Submit</button>
+                                <button className='submit-btn' onClick={saveData}>{isLoading ? (<Loader />) : (<p>Submit</p>)}</button>
                             </div>
 
                         </form>
